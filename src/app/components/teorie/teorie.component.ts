@@ -77,5 +77,5 @@ export class TeorieComponent {
     let fields:any = {};
     Object.keys(data).forEach(key =>  data[key] != '' ? fields[key] = data[key] : key);
     return fields;   
-}
+  }
 }

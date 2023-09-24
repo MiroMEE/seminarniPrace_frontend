@@ -1,1 +1,48 @@
-<p>slovicka works!</p>
+<table>
+    <tr>
+        <td>
+            <button [disabled]="dBvsechnaSlovicka" (click)="button_vsechnaSlovicka()">{{!dBvsechnaSlovicka}}</button>
+            {{_vsechnaSlovicka}}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button [disabled]="dBvypisSlovicka" (click)="button_vypisSlovicek()">{{!dBvypisSlovicka}}</button>
+            {{_vypisSlovicka}}
+            <input #inVypisSlovicka>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <form [formGroup]="vytvareniSlovicka" (ngSubmit)="button_vytvorSlovicka()">
+                <label>Název</label>
+                <input type="text" name="name" formControlName="name">
+                <label>Slovíčka</label>
+                <input type="text" name="Slovicka_json" formControlName="Slovicka_json">
+                <button type="submit">Poslat!</button>
+            </form>
+            {{_vytvorSlovicko}}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <form [formGroup]="aktualizovatSlovicka" (ngSubmit)="button_updateSlovicka()">
+                <label>Id</label>
+                <input type="text" name="id" formControlName="id">
+                <label>Název</label>
+                <input type="text" name="name" formControlName="name">
+                <label>Slovíčka</label>
+                <input type="text" name="Slovicka_json" formControlName="Slovicka_json">
+                <button type="submit">Poslat!</button>
+            </form>
+            {{_aktualizovatSlovicka}}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button [disabled]="dBsmazatSlovicka" (click)="button_smazatSlovicka()">{{!dBsmazatSlovicka}}</button>
+            <input #inSmazatSlovicka>
+            {{_smazatSlovicka}}
+        </td>
+    </tr>
+</table>
