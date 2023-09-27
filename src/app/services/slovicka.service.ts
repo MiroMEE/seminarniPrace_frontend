@@ -10,7 +10,7 @@ export class SlovickaService {
 
   public vytvoritSlovicka(start_value:any): any{
     try {
-      return this.http.post(this.URL+"vytvoritSlovicka",{name:start_value.name,teorie_json:JSON.stringify(start_value.teorie_json)});
+      return this.http.post(this.URL+"vytvoritSlovicka",start_value);
     } catch (error:any) {
       return error.message;
     }
