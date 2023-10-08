@@ -1,52 +1,94 @@
-<table>
-    <tr>
-        <td>Slovíčka!</td>
-        <td *ngIf="!vytvoreniXaktualizovani">id:{{_id}}</td>
-    </tr>
-    <tr>
-        <td>Počet slovíček:</td>
-        <td>{{buttonDalsiSlovicko}} -- zatím nefunguje správně</td>
-    </tr>
-    <tr *ngFor="let slovicko of slovicka_json; index as i">
-        <td>[{{slovicko.first}}] to [{{slovicko.second}}]</td>
-        <button *ngIf="!slovicko_input" (click)="slovicko_input_arr = i;slovicko_input = !slovicko_input">Aktualizovat</button>
-    </tr>
-    <div *ngIf="slovicko_input">
-        <td><input #_first [value]="slovicka_json[slovicko_input_arr].first"></td>
-        <td><input #_second [value]="slovicka_json[slovicko_input_arr].second"></td>
-        <button (click)="slovicko_input = !slovicko_input; slovicka_json[slovicko_input_arr] = {first:_first.value,second:_second.value};">Save</button>
-        <button (click)="slovicko_input = !slovicko_input; slovicka_json.splice(slovicko_input_arr,1)">Remove</button>
-    </div>
-    <tr>
+<table class="tabulka_editovani_slovicek">
+    <td class="hlavni">
+        <h3 class="nadpis">Slovíčka editor</h3>
+        <tr class="nabidka_1">
+            <td *ngIf="nabidka_1=='nic' || nabidka_1=='vytvor'" id="vytvor">Vytváření nových slovíček
+                <button *ngIf="nabidka_1=='nic'" (click)="nabidka_1='vytvor'">o</button>
+            </td>
+            <td  *ngIf="nabidka_1=='nic' || nabidka_1=='aktualizace'" id="aktulizuj">Upravování vytvořených slovíček
+                <button *ngIf="nabidka_1=='nic'" (click)="nabidka_1='aktualizace'">o</button>
+            </td>
+        </tr>
+    </td>
+</table>
+
+<table class="tabulka">
+    <tr *ngIf="nabidka_1=='vytvor'" class="vytvoreni">
         <td>
-            <button (click)="slovicko_input_arr = slovicka_json.length; slovickoAdd(); slovicko_input = !slovicko_input">Další slovíčko</button>
+            <tr class="vytvorit_slovicko">
+                <td id="form_vytvor">
+                    <form [formGroup]="vytvareniSlovicka" (ngSubmit)="button_vytvorSlovicka()">
+                        <label>Název slovíček:</label>
+                        <input type="text" name="name" formControlName="name">
+                        <button type="submit">Vytvořit</button>
+                    </form>
+                </td>
+                <td *ngIf="_vytvorSlovicko!=''" class="vysledek">
+                    {{_vytvorSlovicko}}
+                </td>
+            </tr>
+        </td>
+    </tr>
+    <tr *ngIf="nabidka_1=='aktualizace'" class="aktualizace">
+        <td *ngIf="start_editing" class="uprava_aktualizace">
+            <tr class="aktualizovat_slovicko">
+                <td id="form_aktualizace">
+                    <form [formGroup]="aktualizovatSlovicka" (ngSubmit)="button_updateSlovicka()">
+                        <label>Aktualizovat název</label>
+                        <input type="text" name="name" formControlName="name">
+                        <button type="submit">Aktualizovat</button>
+                    </form>
+                </td>
+                <td *ngIf="_vytvorSlovicko!=''" class="vysledek">
+                    {{_aktualizovatSlovicka}}
+                </td>
+            </tr>
+        </td>
+        <td class="seznam">
+            <button (click)="button_vsechnaSlovicka()">Seznam vytvořených slovíček</button>
+            <table *ngIf="!start_editing">
+                <tr *ngFor="let slovicko of _vsechnaSlovicka">
+                    <td>{{slovicko.name}}</td>
+                    <button (click)="vytvor_aktulizuj(slovicko._id); start_editing=true">Aktualizovat</button>
+                    <button (click)="button_smazatSlovicka(slovicko._id)">Smazat!</button>
+                </tr>
+            </table>
         </td>
     </tr>
 </table>
-<!-- Send -->
-<div *ngIf="vytvoreniXaktualizovani">
-    <form [formGroup]="vytvareniSlovicka" (ngSubmit)="button_vytvorSlovicka()">
-        <label>Název slovíček:</label>
-        <input type="text" name="name" formControlName="name">
-        <button type="submit">Vytvořit</button>
-    </form>
-    {{_vytvorSlovicko}}
-</div>
-<div *ngIf="!vytvoreniXaktualizovani">
-    <button (click)="vytvoreniXaktualizovani = !vytvoreniXaktualizovani; buttonDalsiSlovicko = 0">Zrušit aktualizovani</button>
-    <form [formGroup]="aktualizovatSlovicka" (ngSubmit)="button_updateSlovicka()">
-        <label>Aktualizovat název</label>
-        <input type="text" name="name" formControlName="name">
-        <button type="submit">Aktualizovat</button>
-    </form>
-    {{_aktualizovatSlovicka}}
-</div>
-
-<button (click)="button_vsechnaSlovicka()">Seznam vytvořených slovíček</button>
-<table *ngIf="vytvoreniXaktualizovani">
-    <tr *ngFor="let slovicko of _vsechnaSlovicka">
-        <td>{{slovicko.name}}</td>
-        <button (click)="vytvor_aktulizuj(slovicko._id)">Aktualizovat</button>
-        <button (click)="button_smazatSlovicka(slovicko._id)">Smazat!</button>
+<table class="tabulka">
+    <tr class="both" *ngIf="nabidka_1!='nic'">
+        <td *ngIf="nabidka_1!='nic'" class="vlastnosti">
+            <tr id="pocet_slovicek">Počet slovíček: {{slovicka_json.length}}</tr>
+            <tr *ngIf="start_editing" id="id_slovicek">id: {{_id}}</tr>
+        </td>
+        <td class="zrusit">
+            <tr><button (click)="nabidka_1 = 'nic';reset()">Zrušit</button></tr>
+            <tr><button *ngIf="start_editing==true" (click)="reset()">Zrušit editování</button></tr>
+        </td>
+        <td *ngIf="start_editing==true || nabidka_1=='vytvor'" class="slovnicek">
+            <tr class="vypis_slovicek" *ngFor="let slovicko of slovicka_json; index as i">
+                <td>
+                    [{{slovicko.first}}] to [{{slovicko.second}}]
+                </td>
+                <td>
+                    <button *ngIf="!slovicko_input" (click)="slovicko_input_arr = i;slovicko_input = !slovicko_input">
+                        upravit
+                    </button>
+                </td>
+            </tr>
+            <tr class="uprav_slovicko" *ngIf="slovicko_input">
+                <td><input #_first [value]="slovicka_json[slovicko_input_arr].first"></td>
+                <td><input #_second [value]="slovicka_json[slovicko_input_arr].second"></td>
+                <button (click)="slovicko_input = !slovicko_input; slovicka_json[slovicko_input_arr] = {first:_first.value,second:_second.value};">Save</button>
+                <button (click)="slovicko_input = !slovicko_input; slovicka_json.splice(slovicko_input_arr,1)">Remove</button>
+            </tr>
+            <tr class="pridat_slovicko">
+                <button 
+                (click)="slovicko_input_arr = slovicka_json.length; slovickoAdd(); slovicko_input = !slovicko_input">
+                    Další slovíčko
+                </button>
+            </tr>
+        </td>
     </tr>
 </table>

@@ -18,9 +18,9 @@ export class SlovickaComponent {
   @ViewChild('_second') public _second!: ElementRef;
 
   //vypis - string
-  public _vytvorSlovicko:string = "Vytvoř slovicka (name)!";
+  public _vytvorSlovicko:string = "";
   public _vypisSlovicka:string = "Napiš id Slovicka!";
-  public _aktualizovatSlovicka:string = "Aktualizuj slovíčka!";
+  public _aktualizovatSlovicka:string = "";
   public _smazatSlovicka:string = "Smazat slovíčka!";
 
   // disabled button
@@ -28,13 +28,14 @@ export class SlovickaComponent {
   public dBsmazatSlovicka:boolean = true;
 
   //proVytvoreniJSONU
-  public slovicko_input_arr:number = 0;
-  public slovicko_input:boolean = false;
-  public _id:string = "id";
-  public _vsechnaSlovicka:any = [];
-  public vytvoreniXaktualizovani:boolean = true;
-  public slovicka_json:any = [];
-  public buttonDalsiSlovicko:number = this.slovicka_json.length;
+  public _vsechnaSlovicka:any = []; // ukládá list slovíček
+  public slovicka_json:any = []; // ukládá slovíčka ve tvaru json
+  public _id:string = "id"; // ukládá id, možné jen u aktualizace
+  public nabidka_1:string = "nic"; // [nic,vytvor,aktualizace]
+  public start_editing:boolean = false; // aktualizace - upravování
+  public slovicko_input:boolean = false; // ukládá, jestli mění se slovíčko [přidává, upravuje]
+  public slovicko_input_arr:number = 0; // ukládá si data
+
   // Formuláře
   public vytvareniSlovicka = this.formbuilder.group({
     name: '',
@@ -53,7 +54,6 @@ export class SlovickaComponent {
     })
   }
   public button_vytvorSlovicka():void{
-    this.buttonDalsiSlovicko = 0;
     this.vytvareniSlovicka.controls.slovicka_json.setValue(JSON.stringify(this.slovicka_json));
     this.Slovicka.vytvoritSlovicka(this.vytvareniSlovicka.value).subscribe((value:object)=>{
       this.slovicka_json = [];
@@ -66,7 +66,7 @@ export class SlovickaComponent {
     const filtrujese = this.filterEmptyFields(this.aktualizovatSlovicka.value)
     this.Slovicka.aktualizovatSlovicka(filtrujese).subscribe((value:object)=>{
       this._aktualizovatSlovicka = JSON.stringify(value);
-      this.vytvoreniXaktualizovani = !this.vytvoreniXaktualizovani;
+      this.start_editing = false;
       this.button_vsechnaSlovicka();
     })
   }
@@ -78,15 +78,12 @@ export class SlovickaComponent {
   }
 
   public slovickoAdd():void{
-    this.buttonDalsiSlovicko += 1;
     this.slovicka_json.push({first:"",second:""});
   }
   public vytvor_aktulizuj(id:string){
     this.Slovicka.vypsatSlovicko(id).subscribe((value:any)=>{
       this.slovicka_json = JSON.parse(value.slovicka_json);
-      this.buttonDalsiSlovicko = this.slovicka_json.length;
     });
-    this.vytvoreniXaktualizovani = !this.vytvoreniXaktualizovani;
     this._id = id;
   }
   public ngOnInit():void{
@@ -97,5 +94,13 @@ export class SlovickaComponent {
     let fields:any = {};
     Object.keys(data).forEach(key =>  data[key] != '' ? fields[key] = data[key] : key);
     return fields;   
+  }
+  public reset():void{
+    this.start_editing=false;
+    this.slovicka_json=[];
+    this._id='';
+    this._vsechnaSlovicka = [];
+    this.slovicko_input = false;
+    this.slovicko_input_arr = 0;
   }
 }
