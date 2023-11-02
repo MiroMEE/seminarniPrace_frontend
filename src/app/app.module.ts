@@ -10,6 +10,7 @@ import { UzivatelComponent } from './components/uzivatel/uzivatel.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HryComponent } from './components/hry/hry.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +18,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     HomeComponent,
     TeorieComponent,
     UzivatelComponent,
-    NavbarComponent
+    NavbarComponent,
+    HryComponent
   ],
   imports: [
     BrowserModule,

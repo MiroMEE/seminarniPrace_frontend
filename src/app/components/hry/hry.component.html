@@ -1,0 +1,46 @@
+<div class="mainContent">
+    <table class="table">
+        <tr>
+            <td>
+                Nadpis1
+            </td>
+            <td>
+                Nadpis2
+            </td>
+            <td>
+                Nadpis3
+            </td>
+        </tr>
+        <tr>
+            <td class="td_left">
+                <div style="background-color: inherit;" *ngFor="let sl of _slovicka; index as i">
+                    <ul type="none" class="seznam1">
+                        <li>{{i+1}} - {{sl.name}}</li>
+                        <li ><button class="posliDoSeznamu" (click)="posliDoSeznamu(sl._id)">Do balíčku</button></li>
+                    </ul>
+                </div>
+            </td>
+            <td>
+                <ul>
+                    Předchystání slovíček:
+                    <div *ngFor="let sez of settings.seznamSlovicek; index as i">
+                        {{i+1}}) {{sez.name}}
+                            <li>{{sez._id}}</li>
+                    </div>
+                </ul>
+            </td>
+            <td class="td_right">
+                <ul class="hry" type="none" *ngFor="let mod of modes">
+                    <li>
+                        <button (click)="settings.gameMode = mod">{{mod}}</button>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+    <div class="bottom">
+        <button [disabled]="zjisti()" (click)="pokracuj()">Pokračovat</button>
+    </div>
+</div>
+
+
