@@ -1,3 +1,4 @@
+import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray} from '@angular/cdk/drag-drop';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MenicService } from 'src/app/services/menic.service';
@@ -13,7 +14,8 @@ export class SkatulataComponent {
   constructor(private menicService:MenicService, private slovickaService:SlovickaService){}
 
   public gameSettings:any;
-  public slovicka:any;
+  public slovickaJson:any;
+  public slovickaRozbalene:any = [];
   public ready:boolean = false;
   
   ngOnInit():void{
@@ -22,9 +24,14 @@ export class SkatulataComponent {
         this.gameSettings = value;
         this.slovickaService.ziskatViceSlovicek({"slovicka":value.slovicka}).subscribe((value2:any)=>{
           this.ready = !this.ready;
-          this.slovicka = value2;
-          console.log(this.gameSettings,this.slovicka);
+          this.slovickaJson = value2;
+          this.slovickaJson.forEach((element:any) => {
+            this.slovickaRozbalene = this.slovickaRozbalene.concat(JSON.parse(element.slovicka_json));
+          });
         })
       });
-  }  
+  } 
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.slovickaRozbalene, event.previousIndex, event.currentIndex);
+  }
 }

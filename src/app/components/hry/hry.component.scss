@@ -12,6 +12,7 @@ $color3: rgb(255, 245, 245);
     transform: translate(-50%);
     left: 50%;
     width: fit-content;
+    padding: 7px;
 }
 .table{
     border-collapse: collapse;
@@ -19,40 +20,6 @@ $color3: rgb(255, 245, 245);
 @keyframes animaceZapnuti {
     0% {opacity: 0};
     100% {opacity: 1};
-}
-
-
-
-.seznam1{
-    border: solid rgba($color2,0.8) 2.3px;
-    font-family: sans-serif;
-    background-color: $color1;
-    color: $color2;
-}
-.posliDoSeznamu{
-    transition: background-color 0.2s ease-out;
-    border: solid rgba($color1,0.5);
-    float: right;
-    background-color: $color2;
-}
-.posliDoSeznamu:hover{
-    background-color: $color1;
-}
-
-.td_right{
-    ul{
-        background-color: transparent;
-    }
-    button{
-        color: $color2;
-        border:solid $color2;
-        width: auto;
-        background-color: $color1;
-    }
-
-}
-.td_left,.td_right{
-    vertical-align:top;
 }
 .bottom{
     padding: 5px;

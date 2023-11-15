@@ -1,6 +1,6 @@
-<div *ngIf="ready">
-    {{gameSettings.name}}
-    <div *ngFor="let slov of slovicka">
-        <p>{{slov.name}}</p>
+<div *ngIf="ready" cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+    <div *ngFor="let slovicko of slovickaRozbalene">
+        <div>{{slovicko.first}}</div>
+        <div>{{slovicko.second}}</div>
     </div>
 </div>
