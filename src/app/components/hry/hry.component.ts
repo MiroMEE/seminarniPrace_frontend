@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { MenicService } from 'src/app/services/menic.service';
 import { SlovickaService } from 'src/app/services/slovicka.service';
 
 @Component({
@@ -7,20 +9,24 @@ import { SlovickaService } from 'src/app/services/slovicka.service';
   styleUrls: ['./hry.component.scss']
 })
 export class HryComponent {
-  constructor(private slov:SlovickaService){}
+  constructor(private slov:SlovickaService, private menic:MenicService, private route:Router){}
   public modes:string[] = [
-    "kostky","škatulata"
+    "kostky","skatulata"
   ]
   public _slovicka:any;
+  public _seznamSlovicek:any = [];
   public settings:any = {
-    seznamSlovicek:[],
+    slovicka:[],
     gameMode:"none",
+    name:"undefined"
   }
   public posliDoSeznamu(id:string):void{
     this.slov.vypsatSlovicko(id).subscribe((value:unknown)=>{
-      this.settings.seznamSlovicek.push(value);
+      this._seznamSlovicek.push(value);
+      this.settings.slovicka.push(id);
     }
-  )};
+    )
+  };
   private vsechnaSlovicka():void{
     this.slov.vsechnaSlovicka().subscribe((value:any)=>{
       this._slovicka = value;
@@ -29,14 +35,18 @@ export class HryComponent {
   public ngOnInit():void{
     this.vsechnaSlovicka()
   }
-  zjisti(){
+  public zjisti(){
     const nastaveni = this.settings
-    if(nastaveni.gameMode=="none" || nastaveni.seznamSlovicek.length == 0){
+    if(nastaveni.gameMode=="none" || nastaveni.slovicka.length == 0){
       return true;
     }
     return false;
   }
-  pokracuj():void{
-    console.log("REDIRECTING",this.settings)
+  public pokracuj():void{
+    console.log("Старт",this.settings);
+    this.menic.vytvoritHru(this.settings).subscribe((value:any)=>{
+      console.log(value);
+      this.route.navigate(["hry/"+value.gameMode+"/"+value._id]);    
+    });
   }
 }

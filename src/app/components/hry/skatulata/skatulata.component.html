@@ -1,0 +1,6 @@
+<div *ngIf="ready">
+    {{gameSettings.name}}
+    <div *ngFor="let slov of slovicka">
+        <p>{{slov.name}}</p>
+    </div>
+</div>

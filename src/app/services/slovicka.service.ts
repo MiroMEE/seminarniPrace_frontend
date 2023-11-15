@@ -43,4 +43,11 @@ export class SlovickaService {
       return error.message;
     }
   }
+  public ziskatViceSlovicek(slovicka:any):any{
+    try {
+      return this.http.post(this.URL+"getSlovicek",slovicka);
+    } catch (error:any) {
+      return error.message;
+    }
+  }
 }

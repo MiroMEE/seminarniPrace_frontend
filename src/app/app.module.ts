@@ -11,6 +11,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HryComponent } from './components/hry/hry.component';
+import { CommonModule } from '@angular/common';
+import { SkatulataComponent } from './components/hry/skatulata/skatulata.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,13 +23,16 @@ import { HryComponent } from './components/hry/hry.component';
     TeorieComponent,
     UzivatelComponent,
     NavbarComponent,
-    HryComponent
+    HryComponent,
+    SkatulataComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    CommonModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
