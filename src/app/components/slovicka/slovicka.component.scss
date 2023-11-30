@@ -1,86 +1,82 @@
-$c1:rgb(255, 255, 56);
-$c2:rgb(219, 219, 131);
+// $c1:rgb(255, 255, 56);
+// $c2:rgb(219, 219, 131);
 
-@keyframes loading {
-    0%{opacity: 0;}
-    100%{opacity: 1;}    
-}
-.tabulka_editovani_slovicek{
-    animation: loading forwards 0.5s ;
-    overflow: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-collapse: collapse;
-    background-color: rgba($c1,0.3);
-    border-bottom:1px solid;
-}
-.hlavni{
-}
-.nadpis{
-    text-align: center;
-}
-.nabidka_1{
-    td{
-        padding: 10px;
-    }
-    button{
-        border: none;
-        border-bottom: 1px solid transparent;
-        background-color: transparent;
 
-    }
-    button:hover{
-        border-bottom: 1px solid;
-    }
-}
-.tabulka{
-    display: flex;
-    justify-content: center;
-}
-.zrusit, .vlastnosti{
-    border-bottom: solid $c2;
-    margin-bottom: 5px;
-}
-.both{
-    background-color: rgba($c1,0.1);
-    display: flex;
-    box-shadow: 0 0 4px 0 $c2;
-    padding: 10px;
-    flex-wrap: wrap;
-    button{
-        border: $c1 solid;
-        border-radius: 15px;
-        transition: border 0.2s;
-        background-color: white;
-    }
-    button:hover{
-        border: $c2 solid;
-    }
-}
-.vlastnosti{
-    flex-basis: 50%;
-}
-.zrusit button{
-    transition: border-radius 0.1s ease-in;
-    border-color: red;
-}
-.zrusit button:hover{
-    border-color: rgb(214, 69, 69);
-    border-radius: 10px;
-}
-.slovnicek{
+// .tabulka_editovani_slovicek{
+//     overflow: auto;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     border-collapse: collapse;
+//     background-color: rgba($c1,0.3);
+//     border-bottom:1px solid;
+// }
+// .hlavni{
+// }
+// .nadpis{
+//     text-align: center;
+// }
+// .nabidka_1{
+//     td{
+//         padding: 10px;
+//     }
+//     button{
+//         border: none;
+//         border-bottom: 1px solid transparent;
+//         background-color: transparent;
 
-}
-.vypis_slovicek{
-}
-.uprav_slovicko{
+//     }
+//     button:hover{
+//         border-bottom: 1px solid;
+//     }
+// }
+// .tabulka{
+//     display: flex;
+//     justify-content: center;
+// }
+// .zrusit, .vlastnosti{
+//     border-bottom: solid $c2;
+//     margin-bottom: 5px;
+// }
+// .both{
+//     background-color: rgba($c1,0.1);
+//     display: flex;
+//     box-shadow: 0 0 4px 0 $c2;
+//     padding: 10px;
+//     flex-wrap: wrap;
+//     button{
+//         border: $c1 solid;
+//         border-radius: 15px;
+//         transition: border 0.2s;
+//         background-color: white;
+//     }
+//     button:hover{
+//         border: $c2 solid;
+//     }
+// }
+// .vlastnosti{
+//     flex-basis: 50%;
+// }
+// .zrusit button{
+//     transition: border-radius 0.1s ease-in;
+//     border-color: red;
+// }
+// .zrusit button:hover{
+//     border-color: rgb(214, 69, 69);
+//     border-radius: 10px;
+// }
+// .slovnicek{
 
-}
-.pridat_slovicko{
+// }
+// .vypis_slovicek{
+// }
+// .uprav_slovicko{
+
+// }
+// .pridat_slovicko{
     
-}
+// }
 
-.vytvoreni,.aktualizace{
-    box-shadow: 0 0 1px 0 $c2;
-}
+// .vytvoreni,.aktualizace{
+//     box-shadow: 0 0 1px 0 $c2;
+// }

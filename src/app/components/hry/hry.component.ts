@@ -9,9 +9,8 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./hry.component.scss']
 })
 export class HryComponent {
-  gameMode = new FormControl('')
+  gameMode = new FormControl('');
   slovicka:any = []
- 
   constructor(
     private slov:SlovickaService,
     private menic:MenicService,
@@ -23,6 +22,7 @@ export class HryComponent {
   public tabulka1_nastaveni:string[] = [
     'name','idsSlovicek'
   ];
+  public disabledButtons:any = [0,2];
   public vsechna_slovicka:any;
   public list2_seznamSlovicek:any = [];
 
@@ -41,12 +41,7 @@ export class HryComponent {
   public ngOnInit():void{
     this.vsechnaSlovicka()
   }
-  public zjisti(){
-    if(this.slovicka.length == 0 || this.gameMode.value==""){
-      return true;
-    }
-    return false;
-  }
+
   public pokracuj():void{
     const setting = {
       gameMode:this.gameMode.value,

@@ -8,19 +8,11 @@ $color3: rgb(255, 245, 245);
     border: solid $color1;
     border-top: none;
     border-radius: 0 0 6px 6px;
-    position: relative;
-    transform: translate(-50%);
-    left: 50%;
-    width: fit-content;
-    padding: 7px;
 }
 .table{
     border-collapse: collapse;
 }
-@keyframes animaceZapnuti {
-    0% {opacity: 0};
-    100% {opacity: 1};
-}
+
 .bottom{
     padding: 5px;
     border: $color1 solid;
@@ -29,4 +21,10 @@ $color3: rgb(255, 245, 245);
     left: 50%;
     position: relative;
     transform: translateX(-50%);
+}
+.tabulkaslovicek{
+    position: relative;
+    min-height: 50px;
+    max-height: 300px;
+    overflow: auto;
 }

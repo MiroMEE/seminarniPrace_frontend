@@ -1,0 +1,10 @@
+$color1:greenyellow;
+$color2:rgb(11, 119, 138);
+.spravne{
+    text-align: center;
+    color: $color1;
+    background-color: $color2;
+    border-bottom: solid $color1;
+    font-family: sans-serif;
+    padding-bottom: 5px;
+}

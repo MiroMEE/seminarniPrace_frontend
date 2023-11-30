@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import {MatInputModule} from '@angular/material/input';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SlovickaComponent } from './components/slovicka/slovicka.component';
 import { HomeComponent } from './components/home/home.component';
-import { TeorieComponent } from './components/teorie/teorie.component';
 import { UzivatelComponent } from './components/uzivatel/uzivatel.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -20,13 +19,14 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatListModule} from '@angular/material/list';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {DragDropModule} from '@angular/cdk/drag-drop';
-
+import {MatGridListModule} from '@angular/material/grid-list';
+import { NgbDropdown, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {MatIconModule} from '@angular/material/icon';
 @NgModule({
   declarations: [
     AppComponent,
     SlovickaComponent,
     HomeComponent,
-    TeorieComponent,
     UzivatelComponent,
     NavbarComponent,
     HryComponent,
@@ -44,7 +44,11 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatTabsModule,
     MatListModule,
     MatButtonToggleModule,
-    DragDropModule
+    DragDropModule,
+    MatGridListModule,
+    NgbModule,
+    MatInputModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

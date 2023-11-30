@@ -1,3 +1,24 @@
-nav{
-    border-bottom:solid thin;
+// $color1:rgb(239, 253, 255);
+// $color2: solid rgb(11, 119, 138);
+// $color3:#0d6efd;
+$color1: rgb(240, 95, 95);
+$color2: rgb(255, 255, 255);
+$color3: rgb(255, 245, 245);
+$color4: rgb(247, 153, 153);
+
+.navbar{
+    background-color: $color1;
+    color: $color3;
+}
+.nav-link{
+    color: $color3;
+}
+.navbar-brand{
+    color: $color2;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.nav-link:hover{
+    background-color: $color4;
+    border-radius: 4px;
 }
