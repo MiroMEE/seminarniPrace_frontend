@@ -5,6 +5,7 @@ import { SlovickaComponent } from './components/slovicka/slovicka.component';
 import { UzivatelComponent } from './components/uzivatel/uzivatel.component';
 import { HryComponent } from './components/hry/hry.component';
 import { SkatulataComponent } from './components/hry/skatulata/skatulata.component';
+import { MistnostiComponent } from './components/mistnosti/mistnosti.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'home',pathMatch:'full'},
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path:"uzivatel",component: UzivatelComponent,title:"Uživatel"},
   {path:"hry",component:HryComponent,title:"The Winner Takes It All!"},
   {path:"hry/skatulata",component:SkatulataComponent,title:"Skatulata"},
-  {path:"hry/skatulata/:id",component:SkatulataComponent}
+  {path:"hry/skatulata/:id",component:SkatulataComponent},
+  {path:"mistnosti",component:MistnostiComponent,title:"Více hráčů"}
 ];
 
 @NgModule({

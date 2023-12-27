@@ -12,5 +12,6 @@ export class NavbarComponent {
     {route:"hry",title:"Procvičování"},
     {route:"slovicka",title:"Editace slovíček"},
     {route:"uzivatel",title:"Uživatel"},
+    {route:"mistnosti",title:"Místnosti"}
   ]
 }

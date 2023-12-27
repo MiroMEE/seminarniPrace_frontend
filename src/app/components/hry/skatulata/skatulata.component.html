@@ -10,12 +10,12 @@
         }}
         </h1>
         <div class="max">
-            <mat-grid-list cols="{{first_array.length/2}}" rowHeight="100px">
+            <mat-grid-list cols="{{first_array.length/4}}" rowHeight="5em">
                 <mat-grid-tile *ngFor="let slovicko of first_array">
                     <button mat-button (click)="frs = slovicko">{{slovicko}}</button>
                 </mat-grid-tile>
             </mat-grid-list>
-            <mat-grid-list cols="{{second_array.length/2}}" rowHeight="100px">
+            <mat-grid-list cols="{{second_array.length/4}}" rowHeight="5em">
                 <mat-grid-tile *ngFor="let slovicko of second_array">
                     <button mat-button (click)="scnd = slovicko">{{slovicko}}</button>
                 </mat-grid-tile>

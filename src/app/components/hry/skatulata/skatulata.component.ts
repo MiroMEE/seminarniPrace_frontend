@@ -28,13 +28,13 @@ export class SkatulataComponent {
           this.slovickaJson = value2;
           this.slovickaJson.forEach((element:any) => {
             this.slovickaRozbalene = this.slovickaRozbalene.concat(JSON.parse(element.slovicka_json));
-            
+            this.first_array = [];
+            this.second_array = [];
             this.slovickaRozbalene.forEach((element:any) => {
               this.first_array.push(element.first);
               this.second_array.push(element.second);
             })
             this.first_array = this.promichatSeznam(this.first_array);
-            
             this.second_array = this.promichatSeznam(this.second_array);
           });
           this.ready = 1;

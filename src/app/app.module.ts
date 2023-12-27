@@ -22,6 +22,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { NgbDropdown, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatIconModule} from '@angular/material/icon';
+import { MistnostiComponent } from './components/mistnosti/mistnosti.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +32,7 @@ import {MatIconModule} from '@angular/material/icon';
     NavbarComponent,
     HryComponent,
     SkatulataComponent,
+    MistnostiComponent,
   ],
   imports: [
     BrowserModule,
