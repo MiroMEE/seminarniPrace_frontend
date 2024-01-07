@@ -9,9 +9,6 @@ $color3: rgb(255, 245, 245);
     border-top: none;
     border-radius: 0 0 6px 6px;
 }
-.table{
-    border-collapse: collapse;
-}
 
 .bottom{
     padding: 5px;
@@ -21,10 +18,4 @@ $color3: rgb(255, 245, 245);
     left: 50%;
     position: relative;
     transform: translateX(-50%);
-}
-.tabulkaslovicek{
-    position: relative;
-    min-height: 50px;
-    max-height: 300px;
-    overflow: auto;
 }

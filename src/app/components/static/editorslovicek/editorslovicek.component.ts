@@ -3,11 +3,11 @@ import { SlovickaService } from 'src/app/services/slovicka.service';
 import { FormBuilder } from '@angular/forms';
 
 @Component({
-  selector: 'app-slovicka',
-  templateUrl: './slovicka.component.html',
-  styleUrls: ['./slovicka.component.scss']
+  selector: 'app-editorslovicek',
+  templateUrl: './editorslovicek.component.html',
+  styleUrls: ['./editorslovicek.component.scss']
 })
-export class SlovickaComponent {
+export class EditorslovicekComponent {
 
   constructor(private Slovicka:SlovickaService, private formbuilder:FormBuilder){}
   
@@ -39,11 +39,13 @@ export class SlovickaComponent {
   // Formuláře
   public vytvareniSlovicka = this.formbuilder.group({
     name: '',
+    jazyk: '',
     slovicka_json: ''
   });
   public aktualizovatSlovicka = this.formbuilder.group({
     id: '',
     name: '',
+    jazyk: '',
     slovicka_json: ''
   })
   //methods

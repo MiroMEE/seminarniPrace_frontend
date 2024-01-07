@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Slovicka } from '../interface/slovicka';
 
 @Injectable({
   providedIn: 'root'
@@ -9,45 +10,21 @@ export class SlovickaService {
   constructor(private http:HttpClient) { }
 
   public vytvoritSlovicka(start_value:any): any{
-    try {
-      return this.http.post(this.URL+"vytvoritSlovicka",start_value);
-    } catch (error:any) {
-      return error.message;
-    }
+    return this.http.post(this.URL+"vytvoritSlovicka",start_value);
   }
-  public vsechnaSlovicka(): any{
-    try {
-      return this.http.get(this.URL);
-    } catch (error:any) {
-      return error.message;
-    }
+  public vsechnaSlovicka():any{
+    return this.http.get(this.URL);
   }
   public vypsatSlovicko(start_value:string): any{
-    try {
-      return this.http.get(this.URL+"slovicko/"+start_value);
-    } catch (error:any) {
-      return error.message;
-    }
+    return this.http.get(this.URL+"slovicko/"+start_value);
   }
   public aktualizovatSlovicka(start_value:object): any{
-    try {
-      return this.http.put(this.URL+"update",start_value);
-    } catch (error:any) {
-      return error.message;
-    }
+    return this.http.put(this.URL+"update",start_value);
   }
   public smazatSlovicka(start_value:object):any{
-    try {
-      return this.http.post(this.URL+"smazat",start_value);
-    } catch (error:any) {
-      return error.message;
-    }
+    return this.http.post(this.URL+"smazat",start_value);
   }
   public ziskatViceSlovicek(slovicka:any):any{
-    try {
-      return this.http.post(this.URL+"getSlovicek",slovicka);
-    } catch (error:any) {
-      return error.message;
-    }
+    return this.http.post(this.URL+"getSlovicek",slovicka);
   }
 }

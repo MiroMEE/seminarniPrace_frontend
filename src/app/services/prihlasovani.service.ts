@@ -5,22 +5,18 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class PrihlasovaniService {
-  private URL:string = 'http://localhost:3000/api/user/';
+  private readonly URL:string = 'http://localhost:3000/api/user/';
 
   constructor(private http:HttpClient) { }
 
   public registrovatUzivatele(start_value:any): any{
-    try {
-      return this.http.post(this.URL+"vytvorituzivatele",start_value);
-    } catch (error:any) {
-      return error.message;
-    }
+    return this.http.post(this.URL+"vytvorituzivatele",start_value);
   }
   public prihlasitUzivatele(start_value:any): any{
-    try {
-      return this.http.post(this.URL+"prihlasituzivatele",start_value);
-    } catch (error:any) {
-      return error.message;
-    }
+    console.log(start_value)
+    return this.http.post(this.URL+"prihlasituzivatele",start_value);
+  }
+  public ziskatUzivatele(start_value:any):any{
+    return this.http.post(this.URL+"ziskatUzivatele",start_value);
   }
 }

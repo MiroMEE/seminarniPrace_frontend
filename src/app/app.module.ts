@@ -3,15 +3,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import {MatInputModule} from '@angular/material/input';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SlovickaComponent } from './components/slovicka/slovicka.component';
-import { HomeComponent } from './components/home/home.component';
-import { UzivatelComponent } from './components/uzivatel/uzivatel.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
+import { EditorslovicekComponent } from './components/static/editorslovicek/editorslovicek.component';
+import { HomeComponent } from './components/static/home/home.component';
+import { UzivatelComponent } from './components/static/uzivatel/uzivatel.component';
+import { NavbarComponent } from './components/reused/navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HryComponent } from './components/hry/hry.component';
+import { ProcvicovaniComponent } from './components/static/procvicovani/procvicovani.component';
 import { CommonModule } from '@angular/common';
-import { SkatulataComponent } from './components/hry/skatulata/skatulata.component';
+import { SkatulataComponent } from './components/hrani/skatulata/skatulata.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';
@@ -20,19 +20,26 @@ import {MatListModule} from '@angular/material/list';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatGridListModule} from '@angular/material/grid-list';
-import { NgbDropdown, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatIconModule} from '@angular/material/icon';
-import { MistnostiComponent } from './components/mistnosti/mistnosti.component';
+import { VicehracuMistnostComponent } from './components/static/vicehracu-mistnost/vicehracu-mistnost.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { RegistraceComponent } from './components/reused/registrace/registrace.component';
+import { PrihlaseniComponent } from './components/reused/prihlaseni/prihlaseni.component';
+import { ZiskatSlovickaComponent } from './components/reused/ziskat-slovicka/ziskat-slovicka.component';
 @NgModule({
   declarations: [
     AppComponent,
-    SlovickaComponent,
+    EditorslovicekComponent,
     HomeComponent,
     UzivatelComponent,
     NavbarComponent,
-    HryComponent,
+    ProcvicovaniComponent,
     SkatulataComponent,
-    MistnostiComponent,
+    VicehracuMistnostComponent,
+    RegistraceComponent,
+    PrihlaseniComponent,
+    ZiskatSlovickaComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,7 +57,8 @@ import { MistnostiComponent } from './components/mistnosti/mistnosti.component';
     MatGridListModule,
     NgbModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    MatFormFieldModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

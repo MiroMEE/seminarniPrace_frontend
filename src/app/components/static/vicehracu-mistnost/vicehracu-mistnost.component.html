@@ -1,0 +1,21 @@
+<button (click)="creator = true" [disabled]="creator">Vytvořit místnost</button>
+<div *ngIf="creator">
+    <button (click)="creator = false">zpět</button>
+    <button (click)="button_vytvorServer()">Vytvořit místnost</button>
+    <button (click)="button_start()">Startnout místnost</button>
+    <app-ziskat-slovicka [vybranaSlovicka]="slovicka"></app-ziskat-slovicka>
+    <mat-list>
+        <mat-list-item *ngFor="let player of current__players">{{player}}</mat-list-item>
+    </mat-list>
+</div>
+<div *ngIf="!creator">
+    <button (click)="button_vyhledatServers()">Vyhledat místnosti</button>
+    <mat-list>
+        <mat-list-item *ngFor="let item_server of servers">
+            {{item_server.name}}
+            {{item_server.hosted}}
+            {{item_server.gameMode}}
+            <button mat-button (click)="button_pripojitServer(item_server.number)">připojit</button>
+        </mat-list-item>
+    </mat-list>
+</div>

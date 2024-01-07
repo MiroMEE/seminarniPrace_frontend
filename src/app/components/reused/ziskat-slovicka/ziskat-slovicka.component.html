@@ -1,0 +1,20 @@
+<table mat-table [dataSource]="slovicka" class="tabulkaslovicek">
+    <ng-container matColumnDef="jazyk">
+        <th mat-header-cell *matHeaderCellDef>Jazyk</th>
+        <th mat-cell *matCellDef="let slovicko">{{slovicko.jazyk}}</th>
+    </ng-container>
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let slovicko">{{slovicko.name}}</td>
+    </ng-container>
+    <ng-container matColumnDef="idsSlovicek">
+        <th mat-header-cell *matHeaderCellDef>Přidat slovíčka</th>
+        <th mat-cell *matCellDef="let slovicko">
+            <button mat-flat-button [disabled]="vybranaSlovicka.includes(slovicko)" (click)="vybranaSlovicka.push(slovicko)">Přidat</button>
+        </th>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="tabulka_nastav"></tr>
+    <tr mat-row *matRowDef="let row; columns: tabulka_nastav;"></tr>
+
+</table>
+

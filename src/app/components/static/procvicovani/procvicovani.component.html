@@ -1,0 +1,23 @@
+<div class="mainContent">
+    <mat-tab-group dynamicHeight headerPosition="below" >
+        <mat-tab label="Přidávání slovíček">
+            <app-ziskat-slovicka [vybranaSlovicka]="slovicka"></app-ziskat-slovicka>
+        </mat-tab>
+        <mat-tab label="Slovíčka">
+            <mat-list>
+                <mat-list-item  *ngFor="let slovicko of slovicka; index as i">{{i+1}}) {{slovicko.name}}</mat-list-item>
+            </mat-list>
+        </mat-tab>
+        <mat-tab label="Zvolení hry">
+            <mat-button-toggle-group [formControl]="gameMode">
+                <mat-button-toggle *ngFor="let mod of modes" [value]="mod">{{mod}}</mat-button-toggle>
+            </mat-button-toggle-group>
+            <div>Vybrána hra: {{gameMode.value}}</div>
+        </mat-tab>
+    </mat-tab-group>
+    <div class="bottom">
+        <button mat-raised-button [disabled]="this.slovicka.length == 0 || this.gameMode.value==''" (click)="pokracuj()">Pokračovat</button>
+    </div>
+</div>
+
+
