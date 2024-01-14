@@ -12,16 +12,20 @@ import { WebsocketService } from 'src/app/services/websocket.service';
 
 
 export class VicehracuMistnostComponent {
+  zobraz:string = ""
+
+  voda:string = "";
+  inRoom:boolean = false
   creator:boolean = false;
+  refr:boolean = false;
   slovicka:Array<Slovicka> = [];
   slovicka_string:Array<string> = [];
   constructor(private socket:WebsocketService, private user:PrihlasovaniService){}
   current_user:string = "";
-  server_name:string = "";
-  current__players:string[] = [];
+  server_name:string = "voda";
   servers:any = [];
   modes:string[] = ["testHra"]
-  current_mode:string = "";
+  current_mode:string = "rizek";
   ngOnInit(){
     //automaticky
     this.user.ziskatUzivatele({id:localStorage.getItem("id")}).subscribe((value:any)=>{
@@ -34,23 +38,25 @@ export class VicehracuMistnostComponent {
 
     // pro připojení uživatele
     this.socket.listen("s_joined").subscribe((value:any)=>{
-      this.button_vyhledatServers()
-      this.current__players.push(value.name)
+      this.button_vyhledatServers();
+      this.zobraz = JSON.stringify(value);
     });
 
     // vytváření
     this.socket.listen("s_vytvorServer").subscribe((value:any)=>{
       this.button_vyhledatServers()
+      this.zobraz = JSON.stringify(value)
     });
     this.socket.listen("s_start").subscribe((value:any)=>{
       this.button_vyhledatServers()
     });
   }
   button_vyhledatServers():void{
-    this.socket.vyhledatServers(this.current_user);
+    this.socket.vyhledatServers();
   }
   button_pripojitServer(mistnost:number):void{
-    this.socket.pripojitServer(this.current_user,1); // třeba získat číslo roomky
+    this.socket.pripojitServer(this.current_user,mistnost);
+    this.inRoom=true
   }
   button_vytvorServer():void{
     this.slovicka.forEach(value=>{
@@ -64,7 +70,7 @@ export class VicehracuMistnostComponent {
     }
     this.socket.vytvorServer(createServer);
   }
-  button_start():void{
-    this.socket.start(1); // třeba získat číslo roomky
+  button_start(cislo_roomky:number):void{
+    this.socket.start(cislo_roomky);
   }
 }

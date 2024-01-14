@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Slovicka } from '../interface/slovicka';
-
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class SlovickaService {
-  private URL:string = 'http://localhost:3000/api/slovicka/';
+  private URL:string = environment.apiUrl+'api/slovicka/';
   constructor(private http:HttpClient) { }
 
   public vytvoritSlovicka(start_value:any): any{

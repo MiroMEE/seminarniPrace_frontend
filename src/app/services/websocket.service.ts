@@ -36,9 +36,8 @@ export class WebsocketService {
     return true;
   }
 
-  vyhledatServers(name:string){
-    if(name=="") return false;
-    this.emit("c_vyhledatServers",name);
+  vyhledatServers(){
+    this.emit("c_vyhledatServers",true);
     return true;
   }
   vytvorServer(data:Mistnost):boolean{

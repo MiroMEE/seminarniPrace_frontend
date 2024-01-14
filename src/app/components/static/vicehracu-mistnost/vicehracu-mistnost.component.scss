@@ -1,0 +1,18 @@
+$color1:rgb(184, 184, 184);
+
+.mainButtons{
+    font-size: xx-large;
+    padding: 60px;
+}
+.block{
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    // border:$color1 solid;
+}
+.center{
+    display: flex;
+    justify-content: center;
+    padding: 4rem 10rem 4rem 10rem;
+}

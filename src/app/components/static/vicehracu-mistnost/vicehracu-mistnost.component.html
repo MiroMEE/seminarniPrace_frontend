@@ -1,21 +1,31 @@
-<button (click)="creator = true" [disabled]="creator">Vytvořit místnost</button>
-<div *ngIf="creator">
-    <button (click)="creator = false">zpět</button>
-    <button (click)="button_vytvorServer()">Vytvořit místnost</button>
-    <button (click)="button_start()">Startnout místnost</button>
-    <app-ziskat-slovicka [vybranaSlovicka]="slovicka"></app-ziskat-slovicka>
-    <mat-list>
-        <mat-list-item *ngFor="let player of current__players">{{player}}</mat-list-item>
-    </mat-list>
+<div class="center" *ngIf="!inRoom">
+    <div *ngIf="creator">
+        <button mat-raised-button (click)="creator = false">Zpět</button>
+        <button mat-raised-button (click)="button_vytvorServer(); inRoom=true">Vytvořit</button>
+        <!-- <button mat-raised-button (click)="button_start(0)">Startnout místnost</button> -->
+        <app-ziskat-slovicka [vybranaSlovicka]="slovicka"></app-ziskat-slovicka>
+    </div>
+    <div  *ngIf="!creator && !refr">
+        <button class="mainButtons" mat-stroked-button color="primary" (click)="creator = true; refr = false" [disabled]="creator">Vytvořit místnost</button>
+        <button class="mainButtons" mat-stroked-button color="primary" (click)="refr = true;button_vyhledatServers()">Vyhledat místnosti</button>
+
+    </div>
+    <div *ngIf="!creator && refr">
+        <button mat-stroked-button color="primary" (click)="creator = true; refr = false" [disabled]="creator">Vytvořit místnost</button>
+        <button mat-stroked-button color="primary" (click)="refr = true;button_vyhledatServers()">Vyhledat místnosti</button>
+        <input matInput [value]="voda">
+        <button (click)="button_pripojitServer(+voda)">Připojit se přes číslo</button>
+        <mat-list>
+            <mat-list-item class="block" *ngFor="let item_server of servers">
+                <span matListItemTitle>{{item_server.number}}) {{item_server.name}}</span>
+                <span matListItemLine>{{item_server.hosted}}</span>
+                <span matListItemLine>{{item_server.gameMode}}</span>
+                <button mat-stroked-button color="accent" (click)="button_pripojitServer(item_server.number)">připojit</button>
+            </mat-list-item>
+        </mat-list>
+    </div>
 </div>
-<div *ngIf="!creator">
-    <button (click)="button_vyhledatServers()">Vyhledat místnosti</button>
-    <mat-list>
-        <mat-list-item *ngFor="let item_server of servers">
-            {{item_server.name}}
-            {{item_server.hosted}}
-            {{item_server.gameMode}}
-            <button mat-button (click)="button_pripojitServer(item_server.number)">připojit</button>
-        </mat-list-item>
-    </mat-list>
+<div class="center" *ngIf="inRoom">
+    {{zobraz}}
 </div>
+
