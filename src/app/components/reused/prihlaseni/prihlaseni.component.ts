@@ -1,12 +1,15 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { Router } from '@angular/router';
 import { PrihlasovaniService } from 'src/app/services/prihlasovani.service';
-import { NavbarComponent } from '../navbar/navbar.component';
 @Component({
   selector: 'app-prihlaseni',
   templateUrl: './prihlaseni.component.html',
-  styleUrls: ['./prihlaseni.component.scss']
+  styleUrls: ['./prihlaseni.component.scss'],
+  standalone:true,
+  imports:[ReactiveFormsModule,MatFormFieldModule,CommonModule]
 })
 export class PrihlaseniComponent {
   

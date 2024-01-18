@@ -3,11 +3,16 @@ import { Mistnost } from 'src/app/interface/mistnost';
 import { Slovicka } from 'src/app/interface/slovicka';
 import { PrihlasovaniService } from 'src/app/services/prihlasovani.service';
 import { WebsocketService } from 'src/app/services/websocket.service';
+import { ZiskatSlovickaComponent } from '../../reused/ziskat-slovicka/ziskat-slovicka.component';
+import { MatListModule } from '@angular/material/list';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-vicehracu-mistnost',
   templateUrl: './vicehracu-mistnost.component.html',
-  styleUrls: ['./vicehracu-mistnost.component.scss']
+  styleUrls: ['./vicehracu-mistnost.component.scss'],
+  standalone:true,
+  imports:[ZiskatSlovickaComponent,MatListModule,CommonModule]
 })
 
 

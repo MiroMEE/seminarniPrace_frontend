@@ -1,10 +1,14 @@
 import { Component, Input } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
 import { Slovicka } from 'src/app/interface/slovicka';
 import { SlovickaService } from 'src/app/services/slovicka.service';
 @Component({
   selector: 'app-ziskat-slovicka',
   templateUrl: './ziskat-slovicka.component.html',
   styleUrls: ['./ziskat-slovicka.component.scss'],
+  standalone:true,
+  imports:[MatTableModule,MatButtonModule]
 })
 export class ZiskatSlovickaComponent {
   @Input() vybranaSlovicka:Array<Slovicka> = [];

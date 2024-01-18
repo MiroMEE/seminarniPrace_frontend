@@ -6,25 +6,26 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class SlovickaService {
-  private URL:string = environment.apiUrl+'api/slovicka/';
+  private URL:string = environment.apiUrl+'/slovicka/';
   constructor(private http:HttpClient) { }
 
+  // představa: message
   public vytvoritSlovicka(start_value:any): any{
-    return this.http.post(this.URL+"vytvoritSlovicka",start_value);
+    return this.http.post<Slovicka>(this.URL,start_value);
   }
   public vsechnaSlovicka():any{
-    return this.http.get(this.URL);
+    return this.http.get<Slovicka>(this.URL);
   }
   public vypsatSlovicko(start_value:string): any{
-    return this.http.get(this.URL+"slovicko/"+start_value);
+    return this.http.get<Slovicka>(this.URL+start_value);
   }
-  public aktualizovatSlovicka(start_value:object): any{
-    return this.http.put(this.URL+"update",start_value);
+  public aktualizovatSlovicka(id:string,start_value:object): any{
+    return this.http.patch<Slovicka>(this.URL+id,start_value);
   }
-  public smazatSlovicka(start_value:object):any{
-    return this.http.post(this.URL+"smazat",start_value);
+  public smazatSlovicka(id:string,):any{
+    return this.http.delete<Slovicka>(this.URL+id);
   }
   public ziskatViceSlovicek(slovicka:any):any{
-    return this.http.post(this.URL+"getSlovicek",slovicka);
+  //   return this.http.post<Slovicka>(this.URL+"getSlovicek",slovicka);
   }
 }

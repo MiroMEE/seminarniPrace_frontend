@@ -1,12 +1,16 @@
-import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray} from '@angular/cdk/drag-drop';
-import { Component, ElementRef, ViewChild, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { ActivatedRoute } from '@angular/router';
 import { MenicService } from 'src/app/services/menic.service';
 import { SlovickaService } from 'src/app/services/slovicka.service';
 @Component({
   selector: 'app-skatulata',
   templateUrl: './skatulata.component.html',
-  styleUrls: ['./skatulata.component.scss']
+  styleUrls: ['./skatulata.component.scss'],
+  standalone:true,
+  imports:[MatGridListModule,CommonModule]
+
 })
 export class SkatulataComponent {
   private route = inject(ActivatedRoute);

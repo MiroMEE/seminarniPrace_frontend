@@ -1,17 +1,21 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { SlovickaService } from 'src/app/services/slovicka.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-editorslovicek',
   templateUrl: './editorslovicek.component.html',
-  styleUrls: ['./editorslovicek.component.scss']
+  styleUrls: ['./editorslovicek.component.scss'],
+  standalone:true,
+  imports:[MatFormFieldModule,MatButtonModule,NgbNavModule, ReactiveFormsModule,CommonModule]
 })
 export class EditorslovicekComponent {
+  constructor(private Slovicka:SlovickaService, private formBuilder:FormBuilder){}
 
-  constructor(private Slovicka:SlovickaService, private formbuilder:FormBuilder){}
-  
-  //input
   @ViewChild('inVypisSlovicka') public inVypisSlovicka!: ElementRef;
   @ViewChild('inSmazatSlovicka') public inSmazatSlovicka!: ElementRef;
   @ViewChild('_first') public _first!: ElementRef;
@@ -37,12 +41,12 @@ export class EditorslovicekComponent {
   public slovicko_input_arr:number = 0; // ukládá si data
 
   // Formuláře
-  public vytvareniSlovicka = this.formbuilder.group({
+  public vytvareniSlovicka = this.formBuilder.group({
     name: '',
     jazyk: '',
     slovicka_json: ''
   });
-  public aktualizovatSlovicka = this.formbuilder.group({
+  public aktualizovatSlovicka = this.formBuilder.group({
     id: '',
     name: '',
     jazyk: '',
@@ -66,14 +70,14 @@ export class EditorslovicekComponent {
     this.aktualizovatSlovicka.controls.slovicka_json.setValue(JSON.stringify(this.slovicka_json));
     this.aktualizovatSlovicka.controls.id.setValue(this._id);
     const filtrujese = this.filterEmptyFields(this.aktualizovatSlovicka.value)
-    this.Slovicka.aktualizovatSlovicka(filtrujese).subscribe((value:object)=>{
+    this.Slovicka.aktualizovatSlovicka(this._id,filtrujese).subscribe((value:object)=>{
       this._aktualizovatSlovicka = JSON.stringify(value);
       this.start_editing = false;
       this.button_vsechnaSlovicka();
     })
   }
   public button_smazatSlovicka(smazat:string):void{
-    this.Slovicka.smazatSlovicka({id:smazat}).subscribe((value:object)=>{
+    this.Slovicka.smazatSlovicka(smazat).subscribe((value:object)=>{
       this._smazatSlovicka = JSON.stringify(value);
       this.button_vsechnaSlovicka();
     })

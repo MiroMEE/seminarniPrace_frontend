@@ -1,11 +1,16 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { PrihlasovaniService } from 'src/app/services/prihlasovani.service';
 
 @Component({
   selector: 'app-registrace',
   templateUrl: './registrace.component.html',
   styleUrls: ['./registrace.component.scss'],
+  standalone:true,
+  imports:[ReactiveFormsModule,MatFormFieldModule,CommonModule]
+
 })
 export class RegistraceComponent {
   hide = true;
