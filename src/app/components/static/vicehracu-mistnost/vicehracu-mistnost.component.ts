@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { Mistnost } from 'src/app/interface/mistnost';
-import { Slovicka } from 'src/app/interface/slovicka';
-import { PrihlasovaniService } from 'src/app/services/prihlasovani.service';
+import { Slovicka, SlovickaReady } from 'src/app/interface/slovicka';
 import { WebsocketService } from 'src/app/services/websocket.service';
 import { ZiskatSlovickaComponent } from '../../reused/ziskat-slovicka/ziskat-slovicka.component';
 import { MatListModule } from '@angular/material/list';
 import { CommonModule } from '@angular/common';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-vicehracu-mistnost',
@@ -23,9 +23,9 @@ export class VicehracuMistnostComponent {
   inRoom:boolean = false
   creator:boolean = false;
   refr:boolean = false;
-  slovicka:Array<Slovicka> = [];
+  slovicka:Array<SlovickaReady> = [];
   slovicka_string:Array<string> = [];
-  constructor(private socket:WebsocketService, private user:PrihlasovaniService){}
+  constructor(private socket:WebsocketService, private user:AuthService){}
   current_user:string = "";
   server_name:string = "voda";
   servers:any = [];

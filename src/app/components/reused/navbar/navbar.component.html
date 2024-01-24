@@ -2,6 +2,6 @@
   <a class="navbar-brand" [routerLink]="links[0].route">Slovíčka</a>
   <div class="navbar-nav">
     <a *ngFor="let link of links" class="nav-item nav-link"[routerLink]="link.route">{{ link.title }}</a>
-    <button mat-button *ngIf="loggedIn" (click)="odhlasitse()">Odhlasít se</button>
+    <button *ngIf="loggedIn" mat-button (click)="odhlasitse()">Odhlasít se</button>
   </div>
 </nav>

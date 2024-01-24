@@ -6,13 +6,13 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root'
 })
 export class MenicService {
-  private URL:string = environment.apiUrl+'api/datas/';
+  private URL:string = environment.apiUrl+'data/';
 
   constructor(private http:HttpClient) { }
 
   public vytvoritHru(data:any):any{
     try {
-      return this.http.post(this.URL+"vytvoritHru",data);
+      return this.http.post(this.URL,data);
     } catch (error:any) {
       return error.message;
     }
@@ -20,7 +20,7 @@ export class MenicService {
 
   public ziskatHru(id:string):any{
     try {
-      return this.http.get(this.URL+"ziskatHru/" + id);
+      return this.http.get(this.URL+id);
     } catch (error:any) {
       return error.message;
     }

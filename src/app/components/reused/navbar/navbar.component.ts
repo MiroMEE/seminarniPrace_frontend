@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,13 +12,15 @@ import { MatButtonModule } from '@angular/material/button';
   imports:[MatButtonModule,CommonModule,RouterLink]
 })
 export class NavbarComponent {
-  constructor(){}
-  links:any = []
+  constructor(private auth:AuthService){}
+  links:any = [""];
+  loggedIn:boolean = this.auth.isLoggedIn();
   ngOnInit(){
     this.linkch()
   }
   linkch(){
-    if(this.loggedIn){
+    this.loggedIn = this.auth.isLoggedIn();
+    if(this.auth.isLoggedIn()){
       this.links = [
         {route:"home", title:"Domů"},
         {route:"hry",title:"Procvičování"},
@@ -34,10 +37,7 @@ export class NavbarComponent {
     }
   }
   odhlasitse(){
-    localStorage.removeItem("id");
+    this.auth.logout();
     this.linkch();
-  }
-  get loggedIn():boolean{
-    return localStorage.getItem("id")!=null ? true : false;
   }
 }

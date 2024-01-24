@@ -26,9 +26,11 @@ export class SkatulataComponent {
   public first_array: any = [];
   public second_array: any = [];
   ngOnInit():void{
-      this.menicService.ziskatHru(this.id.split('/').reverse()[0]).subscribe((value:any)=>{
+    console.log(this.id)
+      this.menicService.ziskatHru(this.id).subscribe((value:any)=>{
+        console.log(value.slovicka);
         this.gameSettings = value;
-        this.slovickaService.ziskatViceSlovicek({"slovicka":value.slovicka}).subscribe((value2:any)=>{
+        this.slovickaService.ziskatViceSlovicek(value.slovicka).subscribe((value2:any)=>{
           this.slovickaJson = value2;
           this.slovickaJson.forEach((element:any) => {
             this.slovickaRozbalene = this.slovickaRozbalene.concat(JSON.parse(element.slovicka_json));

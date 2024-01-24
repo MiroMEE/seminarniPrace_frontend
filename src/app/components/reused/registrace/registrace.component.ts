@@ -1,26 +1,27 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { PrihlasovaniService } from 'src/app/services/prihlasovani.service';
+import { MatInputModule } from '@angular/material/input';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-registrace',
   templateUrl: './registrace.component.html',
   styleUrls: ['./registrace.component.scss'],
   standalone:true,
-  imports:[ReactiveFormsModule,MatFormFieldModule,CommonModule]
+  imports:[ReactiveFormsModule,MatFormFieldModule,MatInputModule,CommonModule]
 
 })
 export class RegistraceComponent {
   hide = true;
 
-  name = new FormControl('',[Validators.required, Validators.max(10)]);
+  username = new FormControl('',[Validators.required, Validators.max(10)]);
   email = new FormControl('', [Validators.required, Validators.email]);
-  password = new FormControl('',[Validators.required])
+  password = new FormControl('',[Validators.required]);
 
   getNameErrorMessage(){
-    this.name.hasError('required') ? 'Zadejte svoje jméno' : ''
+    this.username.hasError('required') ? 'Zadejte svoje jméno' : ''
   }
   getEmailErrorMessage() {
     if (this.email.hasError('required')) {
@@ -34,18 +35,20 @@ export class RegistraceComponent {
     }
     return ''
   }
-  constructor(private prihlasovaniService:PrihlasovaniService,private formbuilder:FormBuilder){
+  constructor(private auth:AuthService,private formbuilder:FormBuilder){
   }
+  
   registrovani = this.formbuilder.group({
-    name:this.name,
+    username:this.username,
     email:this.email,
     password:this.password
-    
-  })
+  });
 
   registrovat():void{
-    this.prihlasovaniService.registrovatUzivatele(this.registrovani.value).subscribe((end_value:any)=>{
-      console.log(end_value);
+    console.log(this.registrovani.value);
+    this.auth.registrovatUzivatele(this.registrovani.value).subscribe({
+      next: value => console.log(value),
+      error: err => console.log(err)
     });
   }
 }

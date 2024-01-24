@@ -4,6 +4,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './components/reused/navbar/navbar.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import { authInterceptorProviders } from './_helpers/auth.interceptor.service';
+import { CookieService } from 'ngx-cookie-service';
 @NgModule({
   declarations: [
     AppComponent
@@ -12,9 +15,11 @@ import { NavbarComponent } from './components/reused/navbar/navbar.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NavbarComponent
+    NavbarComponent,
+    BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [authInterceptorProviders,CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+// UŽ VÍM, MUSÍM TO PŘEDĚLAT NA LOCALSTORAGE!!! 

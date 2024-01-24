@@ -23,7 +23,7 @@
     <li ngbNavItem [disabled]="nabidka_1=='vytvor'">
       <button ngbNavLink (click)="nabidka_1='aktualizace'">Aktualizování slovíček</button>
       <ng-template ngbNavContent>
-        <form *ngIf="start_editing" [formGroup]="aktualizovatSlovicka" (ngSubmit)="button_updateSlovicka()">
+        <!-- <form *ngIf="start_editing" [formGroup]="aktualizovatSlovicka" (ngSubmit)="button_updateSlovicka()">
             <mat-form-field>
                 <mat-label>Aktualizovat název</mat-label>
                 <input matInput type="text" name="name" formControlName="name">
@@ -31,19 +31,19 @@
             <mat-form-field>
                 <mat-label>Aktualizovat jazyk</mat-label>
                 <input matInput type="text" name="jazyk" formControlName="jazyk">
-            </mat-form-field>
-            <button mat-raised-button type="submit">Aktualizovat</button>
-        </form>
+            </mat-form-field> -->
+        <!-- </form> -->
+      <button (click)="button_updateSlovicka()" mat-raised-button type="submit">Aktualizovat</button>
         <div *ngIf="!start_editing">
             <button mat-flat-button (click)="button_vsechnaSlovicka()">Seznam vytvořených slovíček</button>
             <table>
-                <tr *ngFor="let slovicko of _vsechnaSlovicka">
+                <tr *ngFor="let slovicko of vsechnaSlovicka">
                     <td>
                         <h3>{{slovicko.name}}</h3>
                     </td>
                     <td>
                         <tr>
-                            <button mat-flat-button color="accent" (click)="vytvor_aktulizuj(slovicko._id); start_editing=true">Aktualizovat</button>
+                            <button mat-flat-button color="accent" (click)="vytvor_aktualizuj(slovicko._id); start_editing=true">Aktualizovat</button>
                         </tr>
                         <tr>
                             <button mat-flat-button color="warn" (click)="button_smazatSlovicka(slovicko._id)">Smazat</button>
@@ -60,8 +60,8 @@
 <table *ngIf="nabidka_1!='nic'">
     <tr>
         <td *ngIf="nabidka_1!='nic'">
-            <tr>Počet slovíček: {{slovicka_json.length}}</tr>
-            <tr *ngIf="start_editing">id: {{_id}}</tr>
+            <tr>Počet slovíček: {{slovicka.length}}</tr>
+            <tr *ngIf="start_editing">id: {{id}}</tr>
         </td>
         <td>
             <tr><button mat-button color="primary" *ngIf="start_editing==true" (click)="reset()">Zrušit editování</button></tr>
@@ -69,7 +69,7 @@
     </tr>
     <tr>
         <td *ngIf="start_editing==true || nabidka_1=='vytvor'">
-            <tr *ngFor="let slovicko of slovicka_json; index as i">
+            <tr *ngFor="let slovicko of slovicka; index as i">
                 <td>
                     [{{slovicko.first}}] to [{{slovicko.second}}]
                 </td>
@@ -78,13 +78,13 @@
                 </td>
             </tr>
             <tr *ngIf="slovicko_input">
-                <td><input #_first [value]="slovicka_json[slovicko_input_arr].first"></td>
-                <td><input #_second [value]="slovicka_json[slovicko_input_arr].second"></td>
-                <button mat-flat-button color="primary" (click)="slovicko_input = !slovicko_input; slovicka_json[slovicko_input_arr] = {first:_first.value,second:_second.value};">Save</button>
-                <button mat-flat-button color="warn" (click)="slovicko_input = !slovicko_input; slovicka_json.splice(slovicko_input_arr,1)">Remove</button>
+                <td><input #_first [value]="slovicka[slovicko_input_arr].first"></td>
+                <td><input #_second [value]="slovicka[slovicko_input_arr].second"></td>
+                <button mat-flat-button color="primary" (click)="slovicko_input = !slovicko_input; slovicka[slovicko_input_arr] = {first:_first.value,second:_second.value};">Save</button>
+                <button mat-flat-button color="warn" (click)="slovicko_input = !slovicko_input; slovicka.splice(slovicko_input_arr,1)">Remove</button>
             </tr>
             <tr>
-                <button mat-flat-button (click)="slovicko_input_arr = slovicka_json.length; slovickoAdd(); slovicko_input = !slovicko_input">Další slovíčko</button>
+                <button mat-flat-button (click)="slovicko_input_arr = slovicka.length; slovickoAdd(); slovicko_input = !slovicko_input">Další slovíčko</button>
             </tr>
         </td>
     </tr>

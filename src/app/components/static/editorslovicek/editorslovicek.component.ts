@@ -3,15 +3,18 @@ import { SlovickaService } from 'src/app/services/slovicka.service';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
+import { SlovickaJson, SlovickaReady } from 'src/app/interface/slovicka';
 
 @Component({
   selector: 'app-editorslovicek',
   templateUrl: './editorslovicek.component.html',
   styleUrls: ['./editorslovicek.component.scss'],
   standalone:true,
-  imports:[MatFormFieldModule,MatButtonModule,NgbNavModule, ReactiveFormsModule,CommonModule]
+  imports:[MatFormFieldModule,MatInputModule, MatButtonModule,NgbNavModule, ReactiveFormsModule,CommonModule],
+  providers:[]
 })
 export class EditorslovicekComponent {
   constructor(private Slovicka:SlovickaService, private formBuilder:FormBuilder){}
@@ -21,91 +24,87 @@ export class EditorslovicekComponent {
   @ViewChild('_first') public _first!: ElementRef;
   @ViewChild('_second') public _second!: ElementRef;
 
-  //vypis - string
-  public _vytvorSlovicko:string = "";
-  public _vypisSlovicka:string = "Napiš id Slovicka!";
-  public _aktualizovatSlovicka:string = "";
-  public _smazatSlovicka:string = "Smazat slovíčka!";
-
   // disabled button
   public dBvypisSlovicka:boolean = true;
   public dBsmazatSlovicka:boolean = true;
 
   //proVytvoreniJSONU
-  public _vsechnaSlovicka:any = []; // ukládá list slovíček
-  public slovicka_json:any = []; // ukládá slovíčka ve tvaru json
-  public _id:string = "id"; // ukládá id, možné jen u aktualizace
+  public vsechnaSlovicka:Array<SlovickaReady> = [];
+  public slovicka:any = []; // ukládá slovíčka ve tvaru json
+  public id:string = "id"; // ukládá id, možné jen u aktualizace
   public nabidka_1:string = "nic"; // [nic,vytvor,aktualizace]
   public start_editing:boolean = false; // aktualizace - upravování
   public slovicko_input:boolean = false; // ukládá, jestli mění se slovíčko [přidává, upravuje]
   public slovicko_input_arr:number = 0; // ukládá si data
 
-  // Formuláře
-  public vytvareniSlovicka = this.formBuilder.group({
+  public vytvareniSlovicka = this.formBuilder.group<SlovickaJson>({
     name: '',
     jazyk: '',
     slovicka_json: ''
   });
-  public aktualizovatSlovicka = this.formBuilder.group({
-    id: '',
-    name: '',
-    jazyk: '',
-    slovicka_json: ''
-  })
-  //methods
 
   public button_vsechnaSlovicka():void{
-    this.Slovicka.vsechnaSlovicka().subscribe((value:string)=>{
-      this._vsechnaSlovicka = value;
-    })
+    this.Slovicka.svojeSlovicka().subscribe({
+      next: value => this.vsechnaSlovicka = value,
+      error: err => console.error('Observable error vsechnaSlovicka: '+err)
+    });
   }
   public button_vytvorSlovicka():void{
-    this.vytvareniSlovicka.controls.slovicka_json.setValue(JSON.stringify(this.slovicka_json));
-    this.Slovicka.vytvoritSlovicka(this.vytvareniSlovicka.value).subscribe((value:object)=>{
-      this.slovicka_json = [];
-      this._vytvorSlovicko = JSON.stringify(value);
+    const slovicka_json = JSON.stringify(this.slovicka);
+    this.vytvareniSlovicka.controls.slovicka_json.setValue(slovicka_json);
+
+    this.Slovicka.vytvoritSlovicka(this.vytvareniSlovicka.value).subscribe({
+      next: value => console.log('Slovicko created: '+ value),
+      error: err => console.log('Observable error button_vytvorSlovicka: '+err)
     });
   }
   public button_updateSlovicka():void{
-    this.aktualizovatSlovicka.controls.slovicka_json.setValue(JSON.stringify(this.slovicka_json));
-    this.aktualizovatSlovicka.controls.id.setValue(this._id);
-    const filtrujese = this.filterEmptyFields(this.aktualizovatSlovicka.value)
-    this.Slovicka.aktualizovatSlovicka(this._id,filtrujese).subscribe((value:object)=>{
-      this._aktualizovatSlovicka = JSON.stringify(value);
-      this.start_editing = false;
-      this.button_vsechnaSlovicka();
-    })
+    const slovicka_json = JSON.stringify(this.slovicka);
+    this.Slovicka.aktualizovatSlovicka(this.id,slovicka_json).subscribe({
+      next: value => {
+        this.reset();
+        console.log("Slovicko aktualizováno"+ value)
+      },
+      error: err => console.error("Observable error button_updateSlovicka: "+err)
+    });
   }
-  public button_smazatSlovicka(smazat:string):void{
-    this.Slovicka.smazatSlovicka(smazat).subscribe((value:object)=>{
-      this._smazatSlovicka = JSON.stringify(value);
-      this.button_vsechnaSlovicka();
-    })
+  public button_smazatSlovicka(id:string):void{
+    this.Slovicka.smazatSlovicka(id).subscribe({
+      next: value => {
+        this.reset()
+        console.log('Slovicko smazáno', + value);
+      },
+      error: err => console.error('Observable error button_smazatSlovicka: '+err)
+    });
   }
 
   public slovickoAdd():void{
-    this.slovicka_json.push({first:"",second:""});
+    this.slovicka.push({first:"",second:""});
   }
-  public vytvor_aktulizuj(id:string){
-    this.Slovicka.vypsatSlovicko(id).subscribe((value:any)=>{
-      this.slovicka_json = JSON.parse(value.slovicka_json);
+  public vytvor_aktualizuj(id:string): void{
+    console.log(id,this.slovicka)
+    this.Slovicka.vypsatSlovicko(id).subscribe({
+      next: value => {
+        this.slovicka = JSON.parse(value.slovicka_json);
+        this.id = id;
+      },
+      error: err => console.error('Observable error vytvor_aktualizuj: '+err)
     });
-    this._id = id;
   }
   public ngOnInit():void{
     this.dBvypisSlovicka = false;
     this.dBsmazatSlovicka = false;
   }
-  private filterEmptyFields(data: any): any {
-    let fields:any = {};
-    Object.keys(data).forEach(key =>  data[key] != '' ? fields[key] = data[key] : key);
-    return fields;   
-  }
+  // private filterEmptyFields(data: any): any {
+  //   let fields:any = {};
+  //   Object.keys(data).forEach(key =>  data[key] != '' ? fields[key] = data[key] : key);
+  //   return fields;   
+  // }
   public reset():void{
     this.start_editing=false;
-    this.slovicka_json=[];
-    this._id='';
-    this._vsechnaSlovicka = [];
+    this.slovicka=[];
+    this.id='';
+    this.vsechnaSlovicka = [];
     this.slovicko_input = false;
     this.slovicko_input_arr = 0;
   }

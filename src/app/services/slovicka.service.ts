@@ -1,31 +1,34 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Slovicka } from '../interface/slovicka';
 import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
+import { SlovickaJson, SlovickaReady } from '../interface/slovicka';
 @Injectable({
   providedIn: 'root'
 })
 export class SlovickaService {
-  private URL:string = environment.apiUrl+'/slovicka/';
+  private URL:string = environment.apiUrl+'slovicka/';
   constructor(private http:HttpClient) { }
 
-  // představa: message
-  public vytvoritSlovicka(start_value:any): any{
-    return this.http.post<Slovicka>(this.URL,start_value);
+  public vytvoritSlovicka(slovicko:object): Observable<SlovickaJson>{
+    return this.http.post<SlovickaJson>(this.URL,slovicko);
   }
-  public vsechnaSlovicka():any{
-    return this.http.get<Slovicka>(this.URL);
+  public vsechnaSlovicka():Observable<Array<SlovickaReady>>{
+    return this.http.get<Array<SlovickaReady>>(this.URL);
   }
-  public vypsatSlovicko(start_value:string): any{
-    return this.http.get<Slovicka>(this.URL+start_value);
+  public svojeSlovicka():Observable<Array<SlovickaReady>>{
+    return this.http.post<Array<SlovickaReady>>(this.URL+'own',{});
   }
-  public aktualizovatSlovicka(id:string,start_value:object): any{
-    return this.http.patch<Slovicka>(this.URL+id,start_value);
+  public vypsatSlovicko(id:string): Observable<SlovickaReady>{
+    return this.http.get<SlovickaReady>(this.URL+id);
   }
-  public smazatSlovicka(id:string,):any{
-    return this.http.delete<Slovicka>(this.URL+id);
+  public aktualizovatSlovicka(id:string,slovicko_json:string): Observable<SlovickaReady>{
+    return this.http.patch<SlovickaReady>(this.URL+id,{slovicka_json:slovicko_json});
   }
-  public ziskatViceSlovicek(slovicka:any):any{
-  //   return this.http.post<Slovicka>(this.URL+"getSlovicek",slovicka);
+  public smazatSlovicka(id:string):Observable<SlovickaReady>{
+    return this.http.delete<SlovickaReady>(this.URL+id);
+  }
+  public ziskatViceSlovicek(slovicka_ids:Array<string>):Observable<Array<SlovickaReady>>{
+    return this.http.post<Array<SlovickaReady>>(this.URL+"a",{slovicka:slovicka_ids});
   }
 }

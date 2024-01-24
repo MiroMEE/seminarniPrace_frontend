@@ -10,7 +10,7 @@
     <ng-container matColumnDef="idsSlovicek">
         <th mat-header-cell *matHeaderCellDef>Přidat slovíčka</th>
         <th mat-cell *matCellDef="let slovicko">
-            <button mat-flat-button [disabled]="vybranaSlovicka.includes(slovicko)" (click)="vybranaSlovicka.push(slovicko)">Přidat</button>
+            <button mat-flat-button [disabled]="vybranaSlovicka.includes(slovicko)" (click)="vybranaSlovicka.push(slovicko); vybranaSlovickaIds.push(slovicko._id)">Přidat</button>
         </th>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="tabulka_nastav"></tr>
