@@ -1,0 +1,7 @@
+{
+    "/api": {
+      "target": "https://procvicslovicka.netlify.app",
+      "secure": false,
+      "changeOrigin":true
+    }
+  }
