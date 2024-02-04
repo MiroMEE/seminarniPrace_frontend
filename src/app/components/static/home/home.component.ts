@@ -24,7 +24,7 @@ export class HomeComponent {
         {name:"Místnosti",url:"mistnosti"}];
     } else{
       this.links = [
-        {name:"Procvičování",url:"procvicovani"},
+        {name:"Procvičování",url:"hry"},
         {name:"Uživatel",url:"uzivatel"}];
     }
   }
