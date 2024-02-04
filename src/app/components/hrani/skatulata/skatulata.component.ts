@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MenicService } from 'src/app/services/menic.service';
 import { SlovickaService } from 'src/app/services/slovicka.service';
 @Component({
@@ -9,7 +10,7 @@ import { SlovickaService } from 'src/app/services/slovicka.service';
   templateUrl: './skatulata.component.html',
   styleUrls: ['./skatulata.component.scss'],
   standalone:true,
-  imports:[MatGridListModule,CommonModule]
+  imports:[MatGridListModule,CommonModule,MatButtonModule,RouterLink]
 
 })
 export class SkatulataComponent {
