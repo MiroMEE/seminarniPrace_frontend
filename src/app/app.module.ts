@@ -9,6 +9,7 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor.service';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthorizeGuard } from './auth.guard';
 import { PreventLoggedInAccess } from './prevent-logged-in-access.guard';
+import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,6 +20,7 @@ import { PreventLoggedInAccess } from './prevent-logged-in-access.guard';
     HttpClientModule,
     NavbarComponent,
     BrowserAnimationsModule,
+    RouterModule
   ],
   providers: [authInterceptorProviders,CookieService,
   AuthorizeGuard,PreventLoggedInAccess
