@@ -19,7 +19,7 @@ export class HomeComponent {
   refresh():void{
     if(this.auth.isLoggedIn()){
       this.links = [
-        {name:"Procvičování",url:"procvicovani"},
+        {name:"Procvičování",url:"hry"},
         {name:"Editor slovíček",url:"editor"},
         {name:"Místnosti",url:"mistnosti"}];
     } else{
