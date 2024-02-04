@@ -1,3 +1,4 @@
+<button mat-raised-button (click)="getSlovickaAll()">Obnovit</button>
 <table mat-table [dataSource]="slovicka" class="tabulkaslovicek">
     <ng-container matColumnDef="jazyk">
         <th mat-header-cell *matHeaderCellDef>Jazyk</th>
@@ -16,4 +17,3 @@
     <tr mat-header-row *matHeaderRowDef="tabulka_nastav"></tr>
     <tr mat-row *matRowDef="let row; columns: tabulka_nastav;"></tr>
 </table>
-

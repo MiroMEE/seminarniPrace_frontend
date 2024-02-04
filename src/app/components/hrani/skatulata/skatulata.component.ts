@@ -27,26 +27,24 @@ export class SkatulataComponent {
   public first_array: any = [];
   public second_array: any = [];
   ngOnInit():void{
-    console.log(this.id)
-      this.menicService.ziskatHru(this.id).subscribe((value:any)=>{
-        console.log(value.slovicka);
-        this.gameSettings = value;
-        this.slovickaService.ziskatViceSlovicek(value.slovicka).subscribe((value2:any)=>{
-          this.slovickaJson = value2;
-          this.slovickaJson.forEach((element:any) => {
-            this.slovickaRozbalene = this.slovickaRozbalene.concat(JSON.parse(element.slovicka_json));
-            this.first_array = [];
-            this.second_array = [];
-            this.slovickaRozbalene.forEach((element:any) => {
-              this.first_array.push(element.first);
-              this.second_array.push(element.second);
-            })
-            this.first_array = this.promichatSeznam(this.first_array);
-            this.second_array = this.promichatSeznam(this.second_array);
-          });
-          this.ready = 1;
-        })
-      });
+    this.menicService.ziskatHru(this.id).subscribe((value:any)=>{
+      this.gameSettings = value;
+      this.slovickaService.ziskatViceSlovicek(value.slovicka).subscribe((value2:any)=>{
+        this.slovickaJson = value2;
+        this.slovickaJson.forEach((element:any) => {
+          this.slovickaRozbalene = this.slovickaRozbalene.concat(JSON.parse(element.slovicka_json));
+          this.first_array = [];
+          this.second_array = [];
+          this.slovickaRozbalene.forEach((element:any) => {
+            this.first_array.push(element.first);
+            this.second_array.push(element.second);
+          })
+          this.first_array = this.promichatSeznam(this.first_array);
+          this.second_array = this.promichatSeznam(this.second_array);
+        });
+        this.ready = 1;
+      })
+    });
   }
   zjisTiSlovicko(slovickoA:any,slovickoB:any):boolean{
     if (this.slovickaRozbalene.filter(function(e:any) { return e.first === slovickoA && e.second === slovickoB; }).length > 0) {

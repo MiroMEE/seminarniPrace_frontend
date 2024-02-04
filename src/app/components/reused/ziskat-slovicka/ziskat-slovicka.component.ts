@@ -27,7 +27,7 @@ export class ZiskatSlovickaComponent {
       error: err => console.error('Observable getSlovickaAll: '+err)
     })
   }
-  ngOnInit():void{
+  ngAfterViewInit():void{
     this.getSlovickaAll();
   }
 }
