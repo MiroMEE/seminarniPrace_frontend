@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { NavbarComponent } from '../navbar/navbar.component';
 @Component({
   selector: 'app-prihlaseni',
   templateUrl: './prihlaseni.component.html',
@@ -39,11 +40,7 @@ export class PrihlaseniComponent {
   prihlasit():void{
     this.auth.prihlasitUzivatele(this.prihlaseni.value).subscribe(
       {
-        next:value => {
-          console.log(value);
-          // this.route.navigate(["/home"])
-          
-          },
+        next:value => window.location.reload(),
         error:err => console.error(err)
     });
   }

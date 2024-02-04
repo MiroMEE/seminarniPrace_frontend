@@ -1,0 +1,24 @@
+<table>
+    <tr>
+        <td>
+            Počet slovíček: {{slovicka.length}}
+        </td>
+    </tr>
+    <tr *ngFor="let slovicko of slovicka; index as i">
+        <td>
+            [{{slovicko.first}}] to [{{slovicko.second}}]
+        </td>
+        <td>
+            <button mat-raised-button *ngIf="!slovicko_input" (click)="slovicko_input_arr = i;slovicko_input = !slovicko_input">upravit</button>
+        </td>
+    </tr>
+    <tr *ngIf="slovicko_input">
+        <td><input #_first [value]="slovicka[slovicko_input_arr].first"></td>
+        <td><input #_second [value]="slovicka[slovicko_input_arr].second"></td>
+        <button mat-flat-button color="primary" (click)="slovicko_input = !slovicko_input; slovicka[slovicko_input_arr] = {first:_first.value,second:_second.value};">Save</button>
+        <button mat-flat-button color="warn" (click)="slovicko_input = !slovicko_input; slovicka.splice(slovicko_input_arr,1)">Remove</button>
+    </tr>
+    <tr>
+        <button mat-flat-button (click)="slovicko_input_arr = slovicka.length; slovickoAdd(); slovicko_input = !slovicko_input">Další slovíčko</button>
+    </tr>
+</table>

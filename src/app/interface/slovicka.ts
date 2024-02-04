@@ -13,3 +13,7 @@ export interface SlovickaReady extends SlovickaJson{
 export interface SlovickaId {
     _id:string;
 }
+export interface slovicko{
+    first:string;
+    second:string;
+  }

@@ -7,9 +7,11 @@ import { NavbarComponent } from './components/reused/navbar/navbar.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import { authInterceptorProviders } from './_helpers/auth.interceptor.service';
 import { CookieService } from 'ngx-cookie-service';
+import { AuthorizeGuard } from './auth.guard';
+import { PreventLoggedInAccess } from './prevent-logged-in-access.guard';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -18,8 +20,9 @@ import { CookieService } from 'ngx-cookie-service';
     NavbarComponent,
     BrowserAnimationsModule,
   ],
-  providers: [authInterceptorProviders,CookieService],
+  providers: [authInterceptorProviders,CookieService,
+  AuthorizeGuard,PreventLoggedInAccess
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-// UŽ VÍM, MUSÍM TO PŘEDĚLAT NA LOCALSTORAGE!!! 

@@ -1,0 +1,29 @@
+<button mat-raised-button *ngIf="start_editing" (click)="addData(false);start_editing=false">Zpět</button>
+<button *ngIf="start_editing" (click)="aktualizujCelaSlovicka()" mat-raised-button type="submit">Aktualizovat změny</button>
+<table *ngIf="!start_editing">
+    <thead>
+        <tr>
+            <td>
+                Moje slovíčka
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        <button mat-flat-button (click)="ziskatSvojeSlovicka()">Refresh</button>
+        <tr *ngFor="let slovicko of svojeSlovicka">
+            <td>
+                <h3>{{slovicko.name}}</h3>
+            </td>
+            <td>
+                <tr>
+                    <button (click)="addData(true)" mat-flat-button color="accent" (click)="ziskatDataSlovicka(slovicko._id)"
+                    >Aktualizovat</button>
+                </tr>
+                <tr>
+                    <button mat-flat-button color="warn" (click)="smazatCelaSlovicka(slovicko._id)">Smazat</button>
+                </tr>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<app-slovicka-edit [(slovicka)]="slovickaEdit" *ngIf="start_editing"></app-slovicka-edit>

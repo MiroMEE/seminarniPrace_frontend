@@ -1,6 +1,3 @@
 <mat-grid-list cols="2" rowHeight="300px" class="grid">
-    <a routerLink="/hry"><mat-grid-tile>Procvičování</mat-grid-tile></a>
-    <a routerLink="/editor"><mat-grid-tile>Editace slovíček</mat-grid-tile></a>
-    <a routerLink="/uzivatel"><mat-grid-tile>Uživatel</mat-grid-tile></a>
-    <a routerLink="/mistnosti"><mat-grid-tile>Místnosti</mat-grid-tile></a>
+    <a *ngFor="let moznost of links" [routerLink]="'/'+moznost.url"><mat-grid-tile>{{moznost.name}}</mat-grid-tile></a>
 </mat-grid-list>

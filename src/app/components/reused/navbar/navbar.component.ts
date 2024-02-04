@@ -39,5 +39,6 @@ export class NavbarComponent {
   odhlasitse(){
     this.auth.logout();
     this.linkch();
+    window.location.reload();
   }
 }

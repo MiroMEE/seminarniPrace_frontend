@@ -7,16 +7,17 @@ import { ProcvicovaniComponent } from './components/static/procvicovani/procvico
 import { SkatulataComponent } from './components/hrani/skatulata/skatulata.component';
 import { VicehracuMistnostComponent } from './components/static/vicehracu-mistnost/vicehracu-mistnost.component';
 import { AuthorizeGuard } from './auth.guard';
+import { PreventLoggedInAccess } from './prevent-logged-in-access.guard';
 
 const routes: Routes = [
   {path:'',redirectTo:'home',pathMatch:'full'},
   {path:"home",component: HomeComponent,title:"Hlavní stránka"},
   {path:"editor",component: EditorslovicekComponent,title:"Editor slovíček",canActivate:[AuthorizeGuard]},
-  {path:"uzivatel",component: UzivatelComponent,title:"Uživatel"},
+  {path:"uzivatel",component: UzivatelComponent,title:"Uživatel",canActivate:[PreventLoggedInAccess]},
   {path:"hry",component:ProcvicovaniComponent,title:"Procvičování slovíček"},
   {path:"hry/skatulata",component:SkatulataComponent,title:"Skatulata"},
   {path:"hry/skatulata/:id",component:SkatulataComponent, title:"Probíhá hra"},
-  {path:"mistnosti",component:VicehracuMistnostComponent,title:"Místnost pro více hráčů"},
+  {path:"mistnosti",component:VicehracuMistnostComponent,title:"Místnost pro více hráčů",canActivate:[AuthorizeGuard]},
   {path:"**",redirectTo:'home'}
 ];
 
