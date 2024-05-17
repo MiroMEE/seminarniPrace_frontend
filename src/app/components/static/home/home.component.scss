@@ -1,18 +1,55 @@
 $color1: rgb(248, 206, 206);
 $color2: rgb(240, 95, 95);
 $color3: rgb(255, 245, 245);
-mat-grid-list{
-    transform: translate(-50%);
-    left: 50%;
-    max-width: 1200px;
+
+
+.flex{
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
 }
-mat-grid-tile {
-    transition: background-color 0.1s, color 0.1s;
-    background-color: $color1;
-    color:$color2;
-    font-size: x-large;
+.grid{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    align-items: center;
+    justify-items: center;
+    padding: 3rem;
+    gap: 15px;
+    .item{
+        transition: background-color 0.1s ease-out, border 0.1s;
+        padding: 2rem;
+        color: $color2;
+        background-color: $color1;
+        border-radius: 4px;
+        text-decoration: none;
+        border: solid transparent 1px;
+    }
+    .item:hover{
+        background-color: rgba($color2,0.1);
+        border-color: $color2;
+    }
 }
-mat-grid-tile:hover{
-    background-color: $color2;
-    color: $color1;
+
+
+.name{
+    color: $color2;
+    text-align: center;
+    border-bottom: $color2 solid;
+    padding: 1rem;
+}
+.text{
+    font-weight: 600;
+    color: $color2;
+    padding: 1rem;
+}
+.warning{
+    font-weight: bolder;
+    border-bottom: $color2 solid;
+}
+
+
+@media screen and (max-width: 500px) {
+    .grid{
+        grid-template-columns: 1fr;
+    }    
 }

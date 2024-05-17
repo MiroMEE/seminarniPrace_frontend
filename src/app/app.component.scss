@@ -5,6 +5,8 @@ $color1: rgb(245, 150, 150);
     100%{opacity: 1;}    
 }
 .mainContent{
+    display: flex;
+    justify-content: center;
     animation: loading forwards 0.5s ;
     background-color: rgba($color1,.1);
     border: solid $color1;

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AuthService } from 'src/app/services/auth.service';
@@ -10,7 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './registrace.component.html',
   styleUrls: ['./registrace.component.scss'],
   standalone:true,
-  imports:[ReactiveFormsModule,MatFormFieldModule,MatInputModule,CommonModule]
+  imports:[ReactiveFormsModule,MatFormFieldModule,MatInputModule,CommonModule,MatButtonModule]
 
 })
 export class RegistraceComponent {

@@ -8,3 +8,31 @@ $color2:rgb(11, 119, 138);
     font-family: sans-serif;
     padding-bottom: 5px;
 }
+.herni-pole{
+}
+/*
+@media screen and (max-width: 950px) {
+    .herni-pole{
+        width: 75vh;
+    }
+}*/
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 20px;
+    align-items: center;
+    justify-items: center;
+    border: solid 1px $color2;
+    padding: 1rem;
+
+    button{
+        border: solid 1px $color1;
+    }
+}
+.flex{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}

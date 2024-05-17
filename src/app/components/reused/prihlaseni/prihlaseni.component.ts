@@ -5,13 +5,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { NavbarComponent } from '../navbar/navbar.component';
+import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-prihlaseni',
   templateUrl: './prihlaseni.component.html',
   styleUrls: ['./prihlaseni.component.scss'],
   standalone:true,
-  imports:[ReactiveFormsModule,MatFormFieldModule,MatInputModule,CommonModule]
+  imports:[ReactiveFormsModule,MatFormFieldModule,MatInputModule,CommonModule,MatButtonModule]
 })
 export class PrihlaseniComponent {
   hide = true;

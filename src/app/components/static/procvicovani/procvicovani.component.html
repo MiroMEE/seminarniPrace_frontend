@@ -1,4 +1,4 @@
-<div class="mainContent">
+<div class="content flex">
     <mat-tab-group dynamicHeight headerPosition="below" >
         <mat-tab label="Přidávání slovíček">
             <app-ziskat-slovicka [vybranaSlovickaIds]="arr_slovickoId" [vybranaSlovicka]="slovicka"></app-ziskat-slovicka>
@@ -15,7 +15,8 @@
             <div>Vybrána hra: {{gameMode.value}}</div>
         </mat-tab>
     </mat-tab-group>
-    <div class="bottom">
+    
+    <div class="flex bottom">
         <button mat-raised-button [disabled]="this.slovicka.length == 0 || this.gameMode.value==''" (click)="pokracuj()">Pokračovat</button>
     </div>
 </div>

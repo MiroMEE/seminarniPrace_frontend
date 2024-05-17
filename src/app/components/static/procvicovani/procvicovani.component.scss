@@ -2,20 +2,24 @@ $color1: rgb(240, 95, 95);
 $color2: rgb(255, 255, 255);
 $color3: rgb(255, 245, 245);
 
-.mainContent{
+.content{
     background-color: rgba($color1,.1);
     animation: animaceZapnuti 1s;
     border: solid $color1;
     border-top: none;
     border-radius: 0 0 6px 6px;
 }
-
+.flex{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
 .bottom{
     padding: 5px;
-    border: $color1 solid;
+    //border: $color1 solid;
     background-color: $color3;
-    float: left;
-    left: 50%;
     position: relative;
-    transform: translateX(-50%);
+}
+
+@media screen and (min-width: 900px){
 }

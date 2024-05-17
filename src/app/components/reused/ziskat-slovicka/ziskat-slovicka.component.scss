@@ -1,0 +1,25 @@
+.pridat-button{
+    border: solid 1px;
+    border-radius: 15px;
+}
+
+.content{
+    flex-direction: column;
+}
+
+.flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.info{
+    padding: 1.5rem;
+    gap: 2rem;
+    .refresh{
+        width: fit-content;
+    }
+    h3{
+        font-size: small;
+    }
+}

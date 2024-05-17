@@ -22,9 +22,11 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 })
 // chyba broser animations module
 export class ProcvicovaniComponent {
+
   slovicka:Array<SlovickaReady> = [];
   arr_slovickoId:Array<SlovickaId> = [];
   gameMode = new FormControl('');
+  
   constructor(
     private menic:MenicService,
     private route:Router,
