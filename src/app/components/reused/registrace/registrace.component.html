@@ -1,19 +1,22 @@
-<form [formGroup]="registrovani" (ngSubmit)="registrovat()">
+<h3 class="green" *ngIf="potvrzeno">Registrace proběhla úspěšně. Nyní proveďte přihlášení.</h3>
+
+<form *ngIf="!potvrzeno" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <h3>Registrace</h3>
     <mat-form-field>
         <mat-label>Zadej svoje jméno</mat-label>
-        <input autocomplete="name" matInput placeholder="pepa123" [formControl]="username" formControlName="username" required>
+        <input autocomplete="name" matInput placeholder="pepa123" formControlName="username" required>
         <mat-error *ngIf="username.invalid">{{getNameErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
         <mat-label>Zadej svůj email</mat-label>
-        <input autocomplete="email" matInput placeholder="jmeno.prijmeni@sps-prerov.cz" [formControl]="email" formControlName="email" required>
+        <input autocomplete="email" matInput placeholder="jmeno.prijmeni@sps-prerov.cz" formControlName="email" required>
         <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
         <mat-label>Zadej svoje heslo</mat-label>
-        <input autocomplete="new-password" matInput type='password' [formControl]="password" formControlName="password" required>
+        <input autocomplete="new-password" matInput type='password' formControlName="password" required>
         <mat-error *ngIf="password.invalid">{{getPasswordErrorMessage()}}</mat-error>
     </mat-form-field>
-    <button mat-raised-button type="submit">Zaregistrovat se!</button>
+    <mat-error>{{error}}</mat-error>
+    <button [disabled]="registerForm.invalid" mat-raised-button type="submit">Zaregistrovat se!</button>
 </form>

@@ -16,8 +16,16 @@ import { MatButtonModule } from '@angular/material/button';
 export class PrihlaseniComponent {
   hide = true;
 
+  constructor(private auth:AuthService,private formbuilder:FormBuilder, private route:Router){
+  }
+
   email = new FormControl('', [Validators.required, Validators.email]);
-  password = new FormControl('',[Validators.required])
+  password = new FormControl('',[Validators.required]);
+
+  loginForm = this.formbuilder.group({
+    email:this.email,
+    password:this.password
+  });
 
   getEmailErrorMessage() {
     if (this.email.hasError('required')) {
@@ -27,21 +35,24 @@ export class PrihlaseniComponent {
   }
   getPasswordErrorMessage(){
     if(this.password.hasError('required')){
-      return 'Zadejte svoje heslo'
+      return 'Zadejte svoje heslo';
     }
-    return ''
+    return '';
   }
-  constructor(private auth:AuthService,private formbuilder:FormBuilder, private route:Router){
+  error:string = '';
+  showError(status:number){
+    if(status == 403){
+      this.error = "email nebo heslo je špatně!";
+    } else{
+      this.error = "chyba na straně serveru";
+    }
   }
-  prihlaseni = this.formbuilder.group({
-    email:this.email,
-    password:this.password
-  })
-  prihlasit():void{
-    this.auth.prihlasitUzivatele(this.prihlaseni.value).subscribe(
-      {
+
+  onSubmit():void{
+    if(this.loginForm.valid)
+    this.auth.prihlasitUzivatele(this.loginForm.value).subscribe({
         next:value => window.location.reload(),
-        error:err => console.error(err)
+        error:err => this.showError(err.status)
     });
   }
 

@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -17,12 +18,21 @@ import { AuthService } from 'src/app/services/auth.service';
 export class RegistraceComponent {
   hide = true;
 
+  constructor(private auth:AuthService,private formbuilder:FormBuilder, private route:Router){
+  }
+
   username = new FormControl('',[Validators.required, Validators.max(10)]);
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('',[Validators.required]);
 
+  registerForm = this.formbuilder.group({
+    username:this.username,
+    email:this.email,
+    password:this.password
+  });
+
   getNameErrorMessage(){
-    this.username.hasError('required') ? 'Zadejte svoje jméno' : ''
+    return this.username.hasError('required') ? 'Zadejte svoje jméno' : ''
   }
   getEmailErrorMessage() {
     if (this.email.hasError('required')) {
@@ -32,24 +42,27 @@ export class RegistraceComponent {
   }
   getPasswordErrorMessage(){
     if(this.password.hasError('required')){
-      return 'Zadejte svoje heslo'
+      return 'Zadejte svoje heslo';
     }
-    return ''
+    return '';
   }
-  constructor(private auth:AuthService,private formbuilder:FormBuilder){
+  error:string = '';
+  showError(status:number){
+    if(status == 403){
+      this.error = "jméno/email už existuje!";
+    } else{
+      this.error = "chyba na straně serveru";
+    }
   }
-  
-  registrovani = this.formbuilder.group({
-    username:this.username,
-    email:this.email,
-    password:this.password
-  });
-
-  registrovat():void{
-    console.log(this.registrovani.value);
-    this.auth.registrovatUzivatele(this.registrovani.value).subscribe({
-      next: value => console.log(value),
-      error: err => console.log(err)
-    });
+  potvrzeno:boolean = false;
+  onSubmit():void{
+    if(this.registerForm.valid){
+      this.auth.registrovatUzivatele(this.registerForm.value).subscribe({
+        next: value => {
+          this.potvrzeno=true;
+        },
+        error: err => this.showError(err.status)
+      });
+    }
   }
 }

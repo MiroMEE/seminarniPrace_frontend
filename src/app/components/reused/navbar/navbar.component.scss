@@ -7,8 +7,14 @@ $color3: rgb(255, 245, 245);
 $color4: rgb(247, 153, 153);
 
 .navbar{
+    top: 0;
+    z-index: 1;
+    position: sticky;
     background-color: $color1;
     color: $color3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .nav-link{
     color: $color3;
@@ -21,4 +27,7 @@ $color4: rgb(247, 153, 153);
 .nav-link:hover{
     background-color: $color4;
     border-radius: 4px;
+}
+.img{
+    height: fit-content;
 }

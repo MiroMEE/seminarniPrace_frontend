@@ -1,4 +1,4 @@
-<form [formGroup]="prihlaseni" (ngSubmit)="prihlasit()">
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <h3>Přihlášení</h3>
     <mat-form-field>
         <mat-label>Zadej svůj email</mat-label>
@@ -10,5 +10,6 @@
         <input autocomplete="current-password" matInput type='password' [formControl]="password"  formControlName="password" required>
         <mat-error *ngIf="password.invalid">{{getPasswordErrorMessage()}}</mat-error>
     </mat-form-field>
-    <button mat-raised-button type="submit">Přihlásit se!</button>
+    <mat-error>{{error}}</mat-error>
+    <button [disabled]="loginForm.invalid" mat-raised-button type="submit">Přihlásit se!</button>
 </form>

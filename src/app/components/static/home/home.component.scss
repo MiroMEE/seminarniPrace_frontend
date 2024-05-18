@@ -15,8 +15,12 @@ $color3: rgb(255, 245, 245);
     justify-items: center;
     padding: 3rem;
     gap: 15px;
+    background-color: rgba(175, 88, 88, 0.363);
+    border: $color2 solid 1px;
+    margin: 1rem;
     .item{
         transition: background-color 0.1s ease-out, border 0.1s;
+        font-size: 4rem;
         padding: 2rem;
         color: $color2;
         background-color: $color1;
@@ -25,7 +29,7 @@ $color3: rgb(255, 245, 245);
         border: solid transparent 1px;
     }
     .item:hover{
-        background-color: rgba($color2,0.1);
+        background-color: rgba(white,0.7);
         border-color: $color2;
     }
 }
@@ -36,6 +40,7 @@ $color3: rgb(255, 245, 245);
     text-align: center;
     border-bottom: $color2 solid;
     padding: 1rem;
+    margin: 0;
 }
 .text{
     font-weight: 600;
@@ -44,9 +49,10 @@ $color3: rgb(255, 245, 245);
 }
 .warning{
     font-weight: bolder;
-    border-bottom: $color2 solid;
 }
-
+.up{
+    border-top: $color2 solid;
+}
 
 @media screen and (max-width: 500px) {
     .grid{

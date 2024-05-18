@@ -1,14 +1,17 @@
 <h1 class="name">Stránka na procvičení slovíček!</h1>
 <div class="grid">
     <a class="item" *ngFor="let link of nacistVyber(isLoggedIn)" [routerLink]="'/'+link.url">
-        <div>{{link.name}}</div>
+        <div>
+            <h1>{{link.name}}</h1>
+            <h6>{{link.podrobnosti}}</h6>
+        </div>
     </a>
 </div>
 <div class="flex">
+    <div class="text up">
+        <p>Pro procvičení slovíček je třeba přesměrovat se na odkaz "Procvičování" a následně si vybrat slovíčka, které chcete procvičit.</p>
+    </div>
     <div class="text warning" *ngIf="!isLoggedIn">
         <p>Pro vytvoření slovíček je nutnost vytvořit si účet a následně přihlásit.</p>
-    </div>
-    <div class="text">
-        <p>Pro procvičení slovíček je třeba přesměrovat se na odkaz "Procvičování" a následně si vybrat slovíčka, které chcete procvičit.</p>
     </div>
 </div>
