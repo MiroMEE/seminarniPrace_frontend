@@ -4,12 +4,13 @@ $color1: rgb(245, 150, 150);
     0%{opacity: 0;}
     100%{opacity: 1;}    
 }
-.mainContent{
-    display: flex;
-    justify-content: center;
+.wrapper{
     animation: loading forwards 0.5s ;
     background-color: rgba($color1,.1);
     border: solid $color1;
     border-top: none;
     border-radius: 0 0 6px 6px;
+
+    display: flex;
+    justify-content: center;
 }
