@@ -2,7 +2,6 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { MenicService } from 'src/app/services/menic.service';
-import { SlovickaService } from 'src/app/services/slovicka.service';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { SlovickaId, SlovickaReady } from 'src/app/interface/slovicka';
 import { MatTabsModule } from '@angular/material/tabs';

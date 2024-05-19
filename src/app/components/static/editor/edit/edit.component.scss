@@ -1,0 +1,51 @@
+.flex{
+    display: flex;
+    flex-wrap: wrap;
+}
+.content{
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 1rem;
+}
+
+.grid{
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
+.mainSlovicka{
+    grid-template-columns: repeat(2,1fr);
+    gap: 4rem;
+}
+.item{
+    grid-template-columns: 3fr 1fr;
+    p{
+        font-size: larger;
+    }
+}
+
+.uprava{
+    background-color: rgba(black, 0.3);
+    border-radius: 0.5rem;
+    padding: 3rem;
+    position: fixed;
+    grid-template-columns: 2fr 1fr;
+    gap: 1rem;
+    div{
+        gap: 0.5rem;
+    }
+    z-index: 2;
+
+}
+
+.input, .button{
+    font-size: 1.2rem;
+    border: solid 1px;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.next{
+    margin: 1rem;
+}

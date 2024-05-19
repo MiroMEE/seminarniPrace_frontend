@@ -1,0 +1,22 @@
+<button class="mainButton" mat-raised-button *ngIf="!start_editing" (click)="start_editing=true;addData(true)">
+    Vytvořit novou sadu slovíček
+</button>
+
+<div class="flex content" *ngIf="start_editing">
+    <button mat-raised-button (click)="addData(false);start_editing=false">
+        Zpět
+    </button>
+    <form class="flex" [formGroup]="vytvareniSlovicka" (ngSubmit)="vytvorCelaSlovicka()">
+        <mat-form-field>
+            <mat-label>Název slovíček</mat-label>
+            <input matInput type="text" name="name" formControlName="name">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Jazyk</mat-label>
+            <input matInput type="text" name="jazyk" formControlName="jazyk">
+        </mat-form-field>
+        <app-edit [(slovicka)]="slovickaEdit"></app-edit>
+
+        <button mat-raised-button color="primary" type="submit">Vytvořit sadu</button>
+    </form>
+</div>

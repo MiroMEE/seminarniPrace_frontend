@@ -1,0 +1,33 @@
+<div class="flex content">
+    <div class="info">
+        Počet slovíček: {{slovicka.length}}
+    </div>
+    <div class="grid mainSlovicka">
+        <div class="grid item" *ngFor="let slovicko of slovicka; index as i">
+            <p>[{{slovicko.first}}] to [{{slovicko.second}}]</p>
+            <button mat-raised-button *ngIf="!slovicko_input" (click)="slovicko_input_arr = i;slovicko_input = !slovicko_input">upravit</button>
+        </div>
+    </div>
+
+
+    <div class="grid uprava" *ngIf="slovicko_input">
+        <div class="flex">
+            <input class="input" (keydown.enter)="firstButtonPressed(_first.value,_second.value)" #_first [value]="slovicka[slovicko_input_arr].first">
+            <input class="input" (keydown.enter)="firstButtonPressed(_first.value,_second.value)" #_second [value]="slovicka[slovicko_input_arr].second">
+        </div>
+
+        <div class="flex">
+            <button class="button" mat-flat-button color="primary" (click)="firstButtonPressed(_first.value,_second.value)">
+                Uložit
+            </button>
+            <button class="button" mat-flat-button color="warn" (click)="secondButtonPressed()">
+                Odstranit
+            </button>
+        </div>
+    </div>
+
+
+    <button *ngIf="!slovicko_input" class="next" mat-flat-button (click)="slovicko_input_arr = slovicka.length; slovickoAdd(); slovicko_input = !slovicko_input">
+        Další slovíčko
+    </button>
+</div>

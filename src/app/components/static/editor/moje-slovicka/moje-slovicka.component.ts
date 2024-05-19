@@ -3,19 +3,19 @@ import { Component, EventEmitter, Input, Output} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { SlovickaReady, slovicko } from 'src/app/interface/slovicka';
 import { SlovickaService } from 'src/app/services/slovicka.service';
-import { SlovickaEditComponent } from "../slovicka-edit/slovicka-edit.component";
+import { EditComponent } from "../edit/edit.component";
 import { ReactiveFormsModule } from '@angular/forms';
 
 
 
 @Component({
-    selector: 'app-slovicka-own',
-    templateUrl: './slovicka-own.component.html',
-    styleUrls: ['./slovicka-own.component.scss'],
+    selector: 'app-moje-slovicka',
+    templateUrl: './moje-slovicka.component.html',
+    styleUrls: ['./moje-slovicka.component.scss'],
     standalone: true,
-    imports: [CommonModule, MatButtonModule, SlovickaEditComponent, ReactiveFormsModule]
+    imports: [CommonModule, MatButtonModule, EditComponent, ReactiveFormsModule]
 })
-export class SlovickaOwnComponent {
+export class MojeSlovickaComponent {
   id:string = "";
   slovickaEdit:Array<slovicko> = [];
   @Output() start_editing_emiter = new EventEmitter<boolean>();

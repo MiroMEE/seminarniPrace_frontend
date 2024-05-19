@@ -7,26 +7,24 @@ import { MatInputModule } from '@angular/material/input';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { SlovickaJson, SlovickaReady } from 'src/app/interface/slovicka';
-import { SlovickaOwnComponent } from "./slovicka-own/slovicka-own.component";
-import { SlovickaVytvorComponent } from './slovicka-vytvor/slovicka-vytvor.component';
+import { MojeSlovickaComponent } from "./moje-slovicka/moje-slovicka.component";
+import { VytvorComponent } from './vytvor/vytvor.component';
 
 @Component({
-    selector: 'app-editorslovicek',
-    templateUrl: './editorslovicek.component.html',
-    styleUrls: ['./editorslovicek.component.scss'],
+    selector: 'app-editor',
+    templateUrl: './editor.component.html',
+    styleUrls: ['./editor.component.scss'],
     standalone: true,
     providers: [],
-    imports: [SlovickaVytvorComponent,MatFormFieldModule, MatInputModule, MatButtonModule, NgbNavModule, ReactiveFormsModule, CommonModule, SlovickaOwnComponent]
+    imports: [VytvorComponent,MatFormFieldModule, MatInputModule, MatButtonModule, NgbNavModule, ReactiveFormsModule, CommonModule, MojeSlovickaComponent]
 })
-export class EditorslovicekComponent {
+export class EditorComponent {
   create_bool:boolean = false;
   update_bool:boolean = false;
   addDataUpdate(data:boolean) {
-    console.log(data);
     this.update_bool = data;
   }
   addDataVytvor(data:boolean){
-    console.log(data);
     this.create_bool = data;
   }
 }

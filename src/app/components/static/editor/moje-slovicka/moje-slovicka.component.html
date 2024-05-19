@@ -1,0 +1,38 @@
+<div class="flex nadpis">
+    <button mat-raised-button *ngIf="start_editing" (click)="addData(false);start_editing=false">
+        Zpět
+    </button>
+</div>
+
+
+<div class="flex content" *ngIf="!start_editing">
+    <div class="flex nadpis">
+        <h1>Moje slovíčka</h1>
+        <button mat-flat-button (click)="ziskatSvojeSlovicka()">Obnovit</button>
+    </div>
+    <div class="flex slovicka">
+        <div class="item" *ngFor="let slovicko of svojeSlovicka;let i=index">
+            <div class="flex">
+                <h1>{{i+1}}</h1>
+                <h3>{{slovicko.name}}</h3>
+            </div>
+            <div class="flex">
+                <button mat-flat-button color="accent" (click)="ziskatDataSlovicka(slovicko._id);addData(true)">
+                    Aktualizovat
+                </button>
+                
+                <button mat-flat-button color="warn" (click)="smazatCelaSlovicka(slovicko._id)">
+                    Smazat
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-edit [(slovicka)]="slovickaEdit" *ngIf="start_editing"></app-edit>
+
+<div class="flex nadpis">
+    <button *ngIf="start_editing" mat-raised-button color="primary" type="submit" (click)="aktualizujCelaSlovicka()" >
+        Aktualizovat změny
+    </button>
+</div>

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SlovickaJson, slovicko } from 'src/app/interface/slovicka';
 import { SlovickaService } from 'src/app/services/slovicka.service';
-import { SlovickaEditComponent } from '../slovicka-edit/slovicka-edit.component';
+import { EditComponent } from '../edit/edit.component';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
@@ -9,13 +9,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-slovicka-vytvor',
-  templateUrl: './slovicka-vytvor.component.html',
-  styleUrls: ['./slovicka-vytvor.component.scss'],
+  selector: 'app-vytvor',
+  templateUrl: './vytvor.component.html',
+  styleUrls: ['./vytvor.component.scss'],
   standalone:true,
-  imports:[SlovickaEditComponent,MatButtonModule,MatFormFieldModule,MatInputModule,CommonModule,ReactiveFormsModule],
+  imports:[EditComponent,MatButtonModule,MatFormFieldModule,MatInputModule,CommonModule,ReactiveFormsModule],
 })
-export class SlovickaVytvorComponent {
+export class VytvorComponent {
   @Output() start_editing_emiter = new EventEmitter<boolean>();
 
   addData(value:boolean){

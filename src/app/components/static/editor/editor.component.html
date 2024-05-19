@@ -1,0 +1,3 @@
+<app-vytvor class="flex" *ngIf="!update_bool" (start_editing_emiter)="addDataVytvor($event)"></app-vytvor>
+<hr *ngIf="update_bool == create_bool">
+<app-moje-slovicka class="flex" *ngIf="!create_bool" (start_editing_emiter)="addDataUpdate($event)"></app-moje-slovicka>
