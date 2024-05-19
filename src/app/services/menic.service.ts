@@ -9,7 +9,7 @@ export class MenicService {
   private URL:string = environment.apiUrl+'data/';
 
   constructor(private http:HttpClient) { }
-
+  //test
   public vytvoritHru(data:any):any{
     try {
       return this.http.post(this.URL,data);

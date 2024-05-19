@@ -9,7 +9,7 @@ import { SlovickaJson, SlovickaReady } from '../interface/slovicka';
 export class SlovickaService {
   private URL:string = environment.apiUrl+'slovicka/';
   constructor(private http:HttpClient) { }
-
+  // CRUD + všechna a některá
   public vytvoritSlovicka(slovicko:object): Observable<SlovickaJson>{
     return this.http.post<SlovickaJson>(this.URL,slovicko);
   }
