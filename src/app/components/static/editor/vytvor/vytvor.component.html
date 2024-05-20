@@ -1,6 +1,9 @@
-<button class="mainButton" mat-raised-button *ngIf="!start_editing" (click)="start_editing=true;addData(true)">
-    Vytvořit novou sadu slovíček
-</button>
+<div class="flex">
+    <button class="mainButton" mat-raised-button *ngIf="!start_editing" (click)="start_editing=true;addData(true)">
+        Vytvořit novou sadu slovíček
+    </button>
+</div>
+
 
 <div class="flex content" *ngIf="start_editing">
     <button mat-raised-button (click)="addData(false);start_editing=false">
