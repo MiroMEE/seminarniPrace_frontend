@@ -30,6 +30,8 @@
     border-radius: 0.5rem;
     padding: 3rem;
     position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
     grid-template-columns: 2fr 1fr;
     gap: 1rem;
     div{
